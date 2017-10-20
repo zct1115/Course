@@ -5,14 +5,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.adapter.MypagerAdapter;
 import com.example.zct11.course.bean.TabEntity;
 import com.example.zct11.course.ui.home.fragment.Course;
 import com.example.zct11.course.ui.home.fragment.Recommend;
 import com.example.zct11.course.utils.ViewFindUtils;
+import com.example.zct11.course.widget.NoScrollViewPager;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -26,11 +29,10 @@ import java.util.ArrayList;
 public class MainFragment extends Fragment {
 
     private SegmentTabLayout mTabLayout;
-    private View view;
-    private ViewPager viewPager;
+
+   // private NoScrollViewPager viewPager;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-
-
+    private String[] mTitles = {"推荐", "课程"};
 
 
 
@@ -44,11 +46,13 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, null);
         //mTabLayout= (SegmentTabLayout) v.findViewById(R.id.main);
-        view=getActivity().getWindow().getDecorView();
-        viewPager= (ViewPager) v.findViewById(R.id.main);
-        mTabLayout = ViewFindUtils.find(view,R.id.tl_1);
+        //viewPager= (NoScrollViewPager) v.findViewById(R.id.main);
+        mTabLayout = ViewFindUtils.find(v,R.id.tl_1);
         initData();
-        mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+        mTabLayout.setTabData(mTitles,getActivity(),R.id.main,mFragments);
+        mTabLayout.setCurrentTab(0);
+       // viewPager.setAdapter(new MypagerAdapter(getFragmentManager(),mFragments));
+       /* mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
                 viewPager.setCurrentItem(position);
@@ -59,16 +63,18 @@ public class MainFragment extends Fragment {
 
             }
         });
-        viewPager.setCurrentItem(1);
+        viewPager.setNoScroll(true);
+        viewPager.setCurrentItem(0);*/
         return v;
     }
 
     private void initData() {
-        mFragments.add(new Recommend());
-        mFragments.add(new Course());
+
+        mFragments.add(Recommend.getInstance());
+        mFragments.add(Course.getInstance());
         //设置tab的标题、选中图标、未选中图标
-        String[] mTitles = {"推荐", "课程"};
-        mTabLayout.setTabData(mTitles);
+
+
     }
 
 

@@ -11,6 +11,8 @@
     <!--tab标签栏文字的颜色-->
     <color name="colorTabText">#585858</color>
 
+    <color name="colorbg">#e1e3e3</color>
+
 
 
 

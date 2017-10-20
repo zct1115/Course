@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        viewPager.setCurrentItem(1);
+        viewPager.setCurrentItem(0);
+        viewPager.setOffscreenPageLimit(4);
         //设置红点
         mTabLayout.showDot(3);
     }

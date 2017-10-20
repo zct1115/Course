@@ -8,7 +8,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorWhite">
+        android:background="@color/colorTheme">
         <com.flyco.tablayout.SegmentTabLayout
             android:id="@+id/tl_1"
             android:layout_width="wrap_content"
@@ -21,9 +21,9 @@
             tl:tl_tab_padding="20dp"/>
 
     </android.support.v7.widget.Toolbar>
-    <android.support.v4.view.ViewPager
+    <FrameLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"></FrameLayout>
 
 </LinearLayout>
