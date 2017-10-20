@@ -30,7 +30,6 @@ public class MainFragment extends Fragment {
 
     private SegmentTabLayout mTabLayout;
 
-   // private NoScrollViewPager viewPager;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles = {"推荐", "课程"};
 
@@ -45,26 +44,10 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, null);
-        //mTabLayout= (SegmentTabLayout) v.findViewById(R.id.main);
-        //viewPager= (NoScrollViewPager) v.findViewById(R.id.main);
         mTabLayout = ViewFindUtils.find(v,R.id.tl_1);
         initData();
         mTabLayout.setTabData(mTitles,getActivity(),R.id.main,mFragments);
         mTabLayout.setCurrentTab(0);
-       // viewPager.setAdapter(new MypagerAdapter(getFragmentManager(),mFragments));
-       /* mTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelect(int position) {
-                viewPager.setCurrentItem(position);
-            }
-
-            @Override
-            public void onTabReselect(int position) {
-
-            }
-        });
-        viewPager.setNoScroll(true);
-        viewPager.setCurrentItem(0);*/
         return v;
     }
 
@@ -72,9 +55,6 @@ public class MainFragment extends Fragment {
 
         mFragments.add(Recommend.getInstance());
         mFragments.add(Course.getInstance());
-        //设置tab的标题、选中图标、未选中图标
-
-
     }
 
 

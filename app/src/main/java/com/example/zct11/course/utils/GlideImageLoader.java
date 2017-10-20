@@ -18,6 +18,7 @@ public class GlideImageLoader extends ImageLoader {
                 .placeholder(R.mipmap.img_two_bi_one)
                 .error(R.mipmap.img_two_bi_one)
                 .crossFade(1000)
+                .centerCrop()
                 .into(imageView);
     }
 }
