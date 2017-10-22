@@ -1,6 +1,7 @@
 package com.example.zct11.course.ui.home.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.adapter.MainAdapter;
 import com.example.zct11.course.adapter.SprogAdapter;
 import com.example.zct11.course.bean.MainRecommend;
+import com.example.zct11.course.ui.home.CourseDetilsActivity;
 import com.example.zct11.course.utils.GlideImageLoader;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.youth.banner.Banner;
@@ -28,7 +31,7 @@ import java.util.List;
  * Created by Administrator on 2017/10/20.
  */
 
-public class Recommend extends Fragment {
+public class Recommend extends Fragment implements MainAdapter.onItemClickListenr{
 
 
     private Banner banner;
@@ -74,6 +77,7 @@ public class Recommend extends Fragment {
 
         recycleview= (RecyclerView) v.findViewById(R.id.xrecycleview);
         adapter=new MainAdapter(data,context);
+        adapter.setOnItemClickListenr(this);
         newrecycleview= (RecyclerView) v.findViewById(R.id.sprog);
         sprogadapter=new SprogAdapter(newdata,context);
         GridLayoutManager manager = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
@@ -152,5 +156,10 @@ public class Recommend extends Fragment {
         newdata.add(main5);
         newdata.add(main6);
         newdata.add(main7);
+    }
+
+    @Override
+    public void onItemClick(int position, ImageView imageView) {
+        startActivity(new Intent(getActivity(), CourseDetilsActivity.class));
     }
 }

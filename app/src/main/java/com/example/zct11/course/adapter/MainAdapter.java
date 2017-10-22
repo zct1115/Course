@@ -23,6 +23,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
     private List<MainRecommend> data;
     private Context context;
     private LayoutInflater inflater;
+    private onItemClickListenr mOnItemClickListenr;
 
     public MainAdapter(List<MainRecommend> data, Context context) {
         this.data = data;
@@ -43,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         }
     }
 
-    private void setViewHolder(MainViewHolder holder, int position) {
+    private void setViewHolder(final MainViewHolder holder, final int position) {
         ImageLoaderUtils.display(context,holder.img,data.get(position).getImg());
         /*new GlideImageLoader().displayImage(context,data.get(position).getImg(),);*/
         holder.title.setText(data.get(position).getTitle());
@@ -51,6 +52,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         holder.step.setText(data.get(position).getStep());
         holder.type.setText(data.get(position).getType());
        /* holder.price.setText("￥"+data.get(position).getPrice());*/
+       holder.img.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               mOnItemClickListenr.onItemClick(position,holder.img);
+
+           }
+       });
     }
 
     @Override
@@ -76,6 +84,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             step= (TextView) itemView.findViewById(R.id.step);
             num= (TextView) itemView.findViewById(R.id.num);
         }
+    }
+
+    public interface onItemClickListenr{
+        void onItemClick(int position, ImageView imageView);
+    }
+    public void setOnItemClickListenr(onItemClickListenr onItemClickListenr){
+        this.mOnItemClickListenr = onItemClickListenr;
     }
 
 }

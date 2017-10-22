@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.adapter.MainAdapter;
 import com.example.zct11.course.adapter.MypagerAdapter;
 import com.example.zct11.course.bean.TabEntity;
 import com.example.zct11.course.ui.home.fragment.Course;
@@ -56,6 +58,7 @@ public class MainFragment extends Fragment {
         mFragments.add(Recommend.getInstance());
         mFragments.add(Course.getInstance());
     }
+
 
 
 }

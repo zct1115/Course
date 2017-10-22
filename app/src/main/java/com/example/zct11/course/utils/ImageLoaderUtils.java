@@ -31,8 +31,8 @@ public class ImageLoaderUtils {
         Glide.with(context).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .placeholder(R.mipmap.img_two_bi_one)
-                .error(R.mipmap.img_two_bi_one)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_image_loading)
                 .crossFade().into(imageView);
     }
 
@@ -43,8 +43,8 @@ public class ImageLoaderUtils {
         Glide.with(context).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .placeholder(R.mipmap.img_two_bi_one)
-                .error(R.mipmap.img_two_bi_one)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_image_loading)
                 .crossFade().into(imageView);
     }
     public static void displaySmallPhoto(Context context, ImageView imageView, String url) {
@@ -53,8 +53,8 @@ public class ImageLoaderUtils {
         }
         Glide.with(context).load(url).asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.mipmap.img_two_bi_one)
-                .error(R.mipmap.img_two_bi_one)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_image_loading)
                 .thumbnail(0.5f)
                 .into(imageView);
     }
@@ -66,8 +66,8 @@ public class ImageLoaderUtils {
                 .format(DecodeFormat.PREFER_ARGB_8888)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.mipmap.img_two_bi_one)
-                .error(R.mipmap.img_two_bi_one)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_image_loading)
                 .into(imageView);
     }
     public static void display(Context context, ImageView imageView, int url) {
@@ -77,8 +77,8 @@ public class ImageLoaderUtils {
         Glide.with(context).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .placeholder(R.mipmap.img_two_bi_one)
-                .error(R.mipmap.img_two_bi_one)
+                .placeholder(R.mipmap.ic_image_loading)
+                .error(R.mipmap.ic_image_loading)
                 .crossFade().into(imageView);
     }
 

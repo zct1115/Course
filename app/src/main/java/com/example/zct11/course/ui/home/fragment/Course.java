@@ -24,31 +24,31 @@ import java.util.ArrayList;
 public class Course extends Fragment {
 
 
-    private Context mContext ;
+    private Context mContext;
     private SlidingTabLayout layout;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {
-             "移动开发", "前端开发", "后端开发", "数据库", "云计算", "UI设计"
+            "前端开发", "移动开发", "后端开发", "数据库", "云计算", "UI设计"
     };
     private MypagerAdapter mAdapter;
 
-    public static Course getInstance (){
-        Course course=new Course();
-        return  course;
+    public static Course getInstance() {
+        Course course = new Course();
+        return course;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_course,null);
-        mContext=getActivity();
-        layout= ViewFindUtils.find(v,R.id.tl_5);
-        final ViewPager vp = (ViewPager) v.findViewById(R.id.vp);
+        View v = inflater.inflate(R.layout.fragment_course, null);
+        mContext = getActivity();
+        layout = ViewFindUtils.find(v, R.id.tl_5);
+        final ViewPager vp = ViewFindUtils.find(v,R.id.vp);
         initView();
-        mAdapter=new MypagerAdapter(getChildFragmentManager(),mFragments);
+        mAdapter = new MypagerAdapter(getFragmentManager(), mFragments);
         vp.setAdapter(mAdapter);
-        vp.setCurrentItem(0);
-        layout.setViewPager(vp,mTitles);
+        layout.setViewPager(vp, mTitles);
+        layout.setCurrentTab(0);
         layout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
@@ -60,15 +60,17 @@ public class Course extends Fragment {
 
             }
         });
+        vp.setCurrentItem(0);
+        vp.setOffscreenPageLimit(6);
         return v;
     }
 
     private void initView() {
-       mFragments.add(Htmling.getInstance());
+        mFragments.add(Htmling.getInstance());
         mFragments.add(Moving.getInstance());
         mFragments.add(Webing.getInstance());
-        mFragments.add(Clouding.getInstance());
         mFragments.add(Database.getInstance());
+        mFragments.add(Clouding.getInstance());
         mFragments.add(Cssing.getInstance());
     }
 }

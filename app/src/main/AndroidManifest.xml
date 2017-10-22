@@ -12,9 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.home.TransitionActivity"
             android:screenOrientation="portrait"
@@ -25,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.home.CourseDetilsActivity"></activity>
     </application>
 
 </manifest>
