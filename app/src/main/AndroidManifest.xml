@@ -5,9 +5,9 @@
     <application
         android:name=".app.CourseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/v_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/v_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -23,7 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.CourseDetilsActivity"></activity>
+        <activity android:name=".ui.home.CourseDetilsActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,10 @@ import android.view.View;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.adapter.MypagerAdapter;
+import com.example.zct11.course.ui.home.coursedetilsfragment.Assess;
+import com.example.zct11.course.ui.home.coursedetilsfragment.Consult;
+import com.example.zct11.course.ui.home.coursedetilsfragment.Introduction;
+import com.example.zct11.course.ui.home.coursedetilsfragment.Study;
 import com.example.zct11.course.ui.home.mainfragment.DownLoadFragment;
 import com.example.zct11.course.ui.home.mainfragment.MainFragment;
 import com.example.zct11.course.ui.home.mainfragment.MessageFragment;
@@ -69,10 +73,10 @@ public class CourseDetilsActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        mFragments.add(MainFragment.getInstance());
-        mFragments.add(MessageFragment.getInstance());
-        mFragments.add(DownLoadFragment.getInstance());
-        mFragments.add(MyFragment.getInstance());
+        mFragments.add(Introduction.getInstance());
+        mFragments.add(Study.getInstance());
+        mFragments.add(Assess.getInstance());
+        mFragments.add(Consult.getInstance());
     }
 
     @Override
