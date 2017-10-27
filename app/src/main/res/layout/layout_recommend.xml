@@ -11,8 +11,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cd_info"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="4dp"
+        android:layout_height="140dp"
+        android:layout_margin="15dp"
         android:clickable="false"
         app:cardCornerRadius="3dp"
         app:cardElevation="8dp">
@@ -61,7 +61,6 @@
         android:ellipsize="end"
         android:id="@+id/title"
         android:textSize="16sp"
-        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cd_info"

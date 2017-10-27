@@ -31,7 +31,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/colorWhite">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -52,13 +53,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/xrecycleview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
 
 
         <LinearLayout
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/colorWhite">
 
             <ImageView
                 android:layout_width="wrap_content"

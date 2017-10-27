@@ -17,13 +17,14 @@ public class Introduction extends Fragment {
 
 
     public static Introduction getInstance(){
-        return new Introduction();
+        Introduction introduction=new Introduction();
+        return introduction;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_introduction,null);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return v;
     }
 }

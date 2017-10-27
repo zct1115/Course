@@ -23,7 +23,7 @@ public class Assess extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_introduction,null);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v=inflater.inflate(R.layout.fragment_assess,null);
+        return v;
     }
 }

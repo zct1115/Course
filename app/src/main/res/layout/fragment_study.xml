@@ -3,8 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:paddingTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="30dp"
+           android:orientation="horizontal">
+           <TextView
+               android:layout_gravity="center"
+               android:layout_marginLeft="10dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textSize="10sp"
+               android:text="1、课程介绍"/>
+       </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_tv"
+                />
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="android第一节课程介绍"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                android:text="5分钟"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

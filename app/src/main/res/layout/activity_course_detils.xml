@@ -6,45 +6,48 @@
     android:layout_height="match_parent"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#000">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bs_ic_clear"/>
+        <TextView
+            android:paddingLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="@color/colorWhite"
+            android:text="android入门到精通"/>
+        </android.support.v7.widget.Toolbar>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
-        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+        <com.example.zct11.course.video.JCVideoPlayerStandardAutoCompleteAfterFullscreen
             android:id="@+id/jc_video"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ImageView
-            android:src="@drawable/bs_ic_clear"
-            android:padding="5dp"
-            android:layout_gravity="left|top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <ImageView
-            android:src="@drawable/ic_share_black_24dp"
-            android:padding="5dp"
-            android:layout_gravity="right|top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
     </FrameLayout>
 
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tl"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#222831"
+        android:background="#3F9FE0"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        tl:tl_indicator_color="#393E46"
-        tl:tl_indicator_corner_radius="5dp"
-        tl:tl_indicator_margin_left="2dp"
-        tl:tl_indicator_margin_right="2dp"
-        tl:tl_indicator_style="BLOCK"/>
+        tl:tl_tab_padding="0dp"
+        tl:tl_tab_width="85dp"
+        tl:tl_textsize="15sp"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:background="@color/colorPageBg"
+        android:layout_height="400dp" />
 
 </LinearLayout>
