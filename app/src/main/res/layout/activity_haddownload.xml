@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        android:background="@color/colorTheme">
+    </android.support.v7.widget.Toolbar>
+    <zlc.season.practicalrecyclerview.PracticalRecyclerView
+        android:id="@+id/recycler"
+        android:background="@color/colorbg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </zlc.season.practicalrecyclerview.PracticalRecyclerView>
+</LinearLayout>

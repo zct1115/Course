@@ -4,11 +4,13 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
+import com.example.zct11.course.base.BaseApplication;
+
 /**
  * Created by zct11 on 2017/10/19.
  */
 
-public class CourseApplication extends Application {
+public class CourseApplication extends BaseApplication {
 
     private static CourseApplication courseApplication;
 

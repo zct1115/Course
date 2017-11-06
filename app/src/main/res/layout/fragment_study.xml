@@ -41,8 +41,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="10dp"
                 android:text="5分钟"/>
+            <ImageButton
+                android:id="@+id/down"
+                android:layout_gravity="center"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_file_download"/>
         </LinearLayout>
 
     </LinearLayout>
