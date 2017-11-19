@@ -7,7 +7,7 @@
     android:background="@color/colorWhite"
     android:foreground="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
-    android:layout_margin="10dp">
+    android:layout_margin="5dp">
 
     <ImageView
         android:layout_marginLeft="5dp"
@@ -119,12 +119,5 @@
             android:textSize="18sp"
             android:text="开始" />
 
-        <Button
-            android:layout_marginRight="5dp"
-            android:id="@+id/more"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_more" />
     </LinearLayout>
 </LinearLayout>

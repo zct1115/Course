@@ -38,9 +38,10 @@
         <activity
             android:name=".widget.webview.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.download.DownloadActivity">3</activity>
+        <activity android:name=".ui.download.DownloadActivity"></activity>
 
-        <activity android:name=".ui.download.HadDownloadActivity"></activity>
+        <activity android:name=".ui.download.HadDownloadActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

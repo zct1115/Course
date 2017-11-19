@@ -1,16 +1,16 @@
-package com.example.zct11.course.message;
+package com.example.zct11.course.bean;
 
 /**
  * Created by zct11 on 2017/11/4.
  */
 
-public class Downloadmessage {
+public class Download {
     private String url;
     private String name;
     private String size;
 
 
-    public Downloadmessage(String url, String name, String size) {
+    public Download(String url, String name, String size) {
         this.url = url;
         this.name = name;
         this.size = size;
@@ -42,7 +42,7 @@ public class Downloadmessage {
 
     @Override
     public String toString() {
-        return "Downloadmessage{" +
+        return "Download{" +
                 "url='" + url + '\'' +
                 ", name='" + name + '\'' +
                 ", size='" + size + '\'' +

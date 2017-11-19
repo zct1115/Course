@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.bean.Download;
+import com.example.zct11.course.database.DBManager;
 import com.example.zct11.course.message.Downloadmessage;
 import com.example.zct11.course.ui.download.DownloadController;
 import com.example.zct11.course.ui.download.DownloadItem;
@@ -23,7 +25,6 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-
 
 
 import io.reactivex.functions.Action;
@@ -56,6 +57,8 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
     private AbstractAdapter mAdapter;
     private DownloadController mDownloadController;
 
+    private DBManager dbManager;
+
 
     private LayoutInflater inflater;
     private Context mContext;
@@ -70,18 +73,18 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
         mContext = parent.getContext();
         initView();
         mRxDownload = RxDownload.getInstance(mContext);
-
+        dbManager = new DBManager(mContext);
         mDownloadController = new DownloadController(mStatusText, mActionButton);
     }
 
     private void initView() {
 
-        mStatusText= (TextView) itemView.findViewById(R.id.status);
-        mActionButton= (Button) itemView.findViewById(R.id.action);
-        mProgress= (ProgressBar) itemView.findViewById(R.id.progress);
-        mName= (TextView) itemView.findViewById(R.id.name);
-        mPercent= (TextView) itemView.findViewById(R.id.percent);
-        mSize= (TextView) itemView.findViewById(R.id.size);
+        mStatusText = (TextView) itemView.findViewById(R.id.status);
+        mActionButton = (Button) itemView.findViewById(R.id.action);
+        mProgress = (ProgressBar) itemView.findViewById(R.id.progress);
+        mName = (TextView) itemView.findViewById(R.id.name);
+        mPercent = (TextView) itemView.findViewById(R.id.percent);
+        mSize = (TextView) itemView.findViewById(R.id.size);
         mActionButton.setOnClickListener(this);
     }
 
@@ -126,14 +129,17 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
         Log.d("DownloadViewHolder进度", status.getPercent());
         mSize.setText(status.getFormatStatusString());
         Log.d("DownloadViewHolder下载速度", status.getFormatStatusString());
-        if(status.getDownloadSize()==status.getTotalSize()){
-            Log.d("DownloadViewHolder", "路径"+data.record.getSavePath());
-            Log.d("DownloadViewHolder", "名称"+data.record.getSaveName());
-            EventBus.getDefault().post(new Downloadmessage(data.record.getSavePath(),data.record.getSaveName(),status.getDownloadSize()/1024+"M"));
+        if (status.getDownloadSize() == status.getTotalSize()) {
+            Log.d("DownloadViewHolder", "路径" + data.record.getSavePath());
+            Log.d("DownloadViewHolder", "名称" + data.record.getSaveName());
+            EventBus.getDefault().post(new Downloadmessage(data.record.getSavePath(), data.record.getSaveName(), status.getDownloadSize() / 1024 + "M"));
             delete();
+            Download download=new Download(data.record.getSavePath()+"/"+data.record.getId()+".mp4",data.record.getSaveName(),status.getDownloadSize() / 1024 + "KB");
+            dbManager.insert(download);
         }
 
     }
+
     private void delete() {
         dispose(data.disposable);
         mRxDownload.deleteServiceDownload(data.record.getUrl(), true)

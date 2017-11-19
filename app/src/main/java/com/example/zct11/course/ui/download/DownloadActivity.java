@@ -11,9 +11,12 @@ import android.widget.Toast;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.adapter.DownloadAdapter;
+import com.example.zct11.course.bean.MyVideo;
 import com.example.zct11.course.client.NetworkUtil;
+import com.example.zct11.course.message.Downloadmessage;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +43,7 @@ public class DownloadActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download);
+        EventBus.getDefault().register(this);
         initView();
     }
 
@@ -91,10 +95,19 @@ public class DownloadActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         List<DownloadItem> list = mAdapter.getData();
         for (DownloadItem each : list) {
             Utils.dispose(each.disposable);
         }
+    }
+
+    @Subscribe
+    public void getData(Downloadmessage downloadmessage){
+        MyVideo myVideo=new MyVideo();
+        myVideo.setTitle(downloadmessage.getName());
+        myVideo.setSize(downloadmessage.getSize());
+        myVideo.setPath(downloadmessage.getUrl());
     }
 
 }
