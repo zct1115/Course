@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.ui.login.LoginActivity;
+import com.example.zct11.course.ui.me.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +36,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private ImageView sexImg;
     private TextView studyTime;
     private LinearLayout login;
+    private LinearLayout setting;
 
     public static MyFragment getInstance() {
         MyFragment myFragment = new MyFragment();
@@ -58,6 +60,8 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         sexImg= (ImageView) v.findViewById(R.id.sex_img);
         studyTime= (TextView) v.findViewById(R.id.study_time);
         login= (LinearLayout) v.findViewById(R.id.login);
+        setting=(LinearLayout) v.findViewById(R.id.setting);
+        setting.setOnClickListener(this);
         nologin.setOnClickListener(this);
     }
 
@@ -65,6 +69,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+        switch (view.getId()){
+            case R.id.nologin:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.setting:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+        }
+
     }
 }

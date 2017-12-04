@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvRegister= (TextView) findViewById(R.id.tv_register);
         svRoot= (ScrollView) findViewById(R.id.sv_root);
         back= (ImageView) findViewById(R.id.back);
+        back.setOnClickListener(this);
         btnSign.setOnClickListener(this);
         //高斯模糊背景
         applyBlur();
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
        switch (view.getId()){
            case R.id.back:
-               finish();
+               LoginActivity.this.finish();
                break;
            case R.id.btn_sign:
                if (!validate()) {

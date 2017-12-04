@@ -5,6 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,7 +18,9 @@ import com.example.zct11.course.bean.Download;
 import com.example.zct11.course.bean.MyVideo;
 import com.example.zct11.course.ui.download.DownloadItem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import zlc.season.practicalrecyclerview.AbstractAdapter;
 import zlc.season.practicalrecyclerview.AbstractViewHolder;
@@ -30,10 +36,33 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
     private LayoutInflater inflater;
     private onItemClickListenr mOnItemClickListenr;
 
+    private boolean isshowBox=false;
+
+    public boolean isIsshowBox() {
+        return isshowBox;
+    }
+
+    public void setIsshowBox(boolean isshowBox) {
+        this.isshowBox = isshowBox;
+    }
+
+    private Map<Integer,Boolean> map=new HashMap<>();
+
     public VideoAdapter(List<MyVideo> data, Context context) {
         this.data = data;
         this.context = context;
         inflater=LayoutInflater.from(context);
+        initMap();
+    }
+
+    private void initMap() {
+        if(data.size()!=0){
+            for (int i = 0; i < data.size(); i++) {
+                map.put(i, false);
+            }
+        }
+
+
     }
 
     @Override
@@ -48,20 +77,62 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
         }
     }
 
-    private void setViewHolder(videoViewHolder holder, final int position) {
+    private void setViewHolder(final videoViewHolder holder, final int position) {
         holder.name.setText(data.get(position).getTitle());
         holder.size.setText(data.get(position).getSize());
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnItemClickListenr.onItemClick(position);
             }
         });
+       /* holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                holder.checkBox.setVisibility(View.VISIBLE);
+
+                mOnItemClickListenr.onLongClick(position);
+                return false;
+            }
+        });*/
+        if (isshowBox) {
+            holder.checkBox.setVisibility(View.VISIBLE);
+        } else {
+            holder.checkBox.setVisibility(View.GONE);
+        }
+        /*Animation animation = AnimationUtils.loadAnimation(context, R.anim.list_anim);*/
+        //设置checkBox显示的动画
+        /*if (isshowBox)
+            holder.checkBox.startAnimation(animation);*/
+        //设置Tag
+        /*holder.root.setTag(position);*/
+        //设置checkBox改变监听
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //用map集合保存
+                if (isChecked){
+                    map.put(position, isChecked);
+                }else {
+                    map.remove(position);
+                }
+
+            }
+        });
+       /* // 设置CheckBox的状态
+        if (map.get(position) == null) {
+            map.put(position, false);
+        }*/
+        //holder.checkBox.setChecked(map.get(position));
+
+
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+
     }
 
     public class videoViewHolder extends RecyclerView.ViewHolder{
@@ -69,6 +140,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
         private TextView size;
         private ImageView imageView;
         private LinearLayout linearLayout;
+        private CheckBox checkBox;
 
         public videoViewHolder(View itemView) {
             super(itemView);
@@ -76,11 +148,35 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
             size=(TextView) itemView.findViewById(R.id.video_size);
             imageView=(ImageView) itemView.findViewById(R.id.video_img);
             linearLayout= (LinearLayout) itemView.findViewById(R.id.video);
+            checkBox= (CheckBox) itemView.findViewById(R.id.check);
         }
     }
 
+    //返回集合给MainActivity
+    public Map<Integer, Boolean> getMap() {
+        return map;
+    }
+    //设置是否显示CheckBox
+    public void setShowBox() {
+        //取反
+        isshowBox = !isshowBox;
+    }
+
+    //点击item选中CheckBox
+    public void setSelectItem(int position) {
+        //对当前状态取反
+        if (map.get(position)) {
+            map.put(position, false);
+        } else {
+            map.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+
     public interface onItemClickListenr{
         void onItemClick(int position);
+        void onLongClick(int position);
     }
     public void setOnItemClickListenr(onItemClickListenr onItemClickListenr){
         this.mOnItemClickListenr = onItemClickListenr;

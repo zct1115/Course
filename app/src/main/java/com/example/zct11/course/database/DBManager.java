@@ -19,6 +19,7 @@ public class DBManager {
     private DBHelper dbHelper;
     private SQLiteDatabase db;
     private static final String tbname="down";
+    private static final String KEY_ROWID="id";
 
     public DBManager(Context context) {
         dbHelper=new DBHelper(context);
@@ -50,7 +51,7 @@ public class DBManager {
             Cursor cursor=db.rawQuery("select * from  down",null);
             for(cursor.moveToFirst();!cursor.isAfterLast(); cursor.moveToNext()){
 
-                Download download=new Download(cursor.getString(cursor.getColumnIndex("path")),cursor.getString(cursor.getColumnIndex("name")),cursor.getString(cursor.getColumnIndex("size")));
+                Download download=new Download(cursor.getString(cursor.getColumnIndex("path")),cursor.getString(cursor.getColumnIndex("name")),cursor.getString(cursor.getColumnIndex("size")),cursor.getString(cursor.getColumnIndex("id")));
                 downloads.add(download);
             }
             db.setTransactionSuccessful();
@@ -59,5 +60,9 @@ public class DBManager {
             db.endTransaction();
         }
 
+    }
+
+    public boolean delete(String id){
+        return db.delete(tbname,KEY_ROWID+"="+id,null)>0;
     }
 }

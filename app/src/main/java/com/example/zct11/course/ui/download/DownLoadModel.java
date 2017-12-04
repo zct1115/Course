@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.SchedulerSupport;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import zlc.season.rxdownload2.RxDownload;
@@ -34,7 +36,7 @@ public class DownLoadModel {
 
     public DownLoadModel(int notificationId) {
         this.NotificationId = notificationId;
-        Intent intent = new Intent(CourseApplication.getAppContext(), MainActivity.class);
+        Intent intent = new Intent(CourseApplication.getAppContext(), DownloadActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(CourseApplication.getAppContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mNotificationManager = (NotificationManager) CourseApplication.getAppContext().getSystemService(NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(CourseApplication.getAppContext());
@@ -44,6 +46,7 @@ public class DownLoadModel {
                 .setOngoing(true)//ture，设置他为一个正在进行的通知。他们通常是用来表示一个后台任务,用户积极参与(如播放音乐)或以某种方式正在等待,因此占用设备(如一个文件下载,同步操作,主动网络连接)
                 .setDefaults(Notification.DEFAULT_VIBRATE)//向通知添加声音、闪灯和振动效果的最简单、最一致的方式是使用当前的用户默认设置，使用defaults属性，可以组合
                 .setSmallIcon(R.mipmap.v_icon);//设置通知小ICON
+
     }
 
     /**
@@ -60,7 +63,7 @@ public class DownLoadModel {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         Log.d("DownLoadModel", "开始下载");
-                        DownloadStatus status= (DownloadStatus) o;
+                        DownloadStatus status = (DownloadStatus) o;
                         mBuilder.setContentTitle(name);
                         mBuilder.setContentText("下载中...");
                         mBuilder.setProgress((int) status.getTotalSize(), (int) status.getDownloadSize(), false);
@@ -69,7 +72,26 @@ public class DownLoadModel {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-                        Log.d("DownLoadModel", "添加下载任务");
+                        mBuilder.setContentTitle(name);
+                        mBuilder.setContentText("下载失败");
+                        mBuilder.setProgress(0, 0, false);
+                        mBuilder.setOngoing(false);
+                        mNotificationManager.notify(NotificationId, mBuilder.build());
+                        mNotificationManager.cancel(NotificationId);
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        //下载成功
+                        Log.d("download", "run: ");
+                        mBuilder.setContentTitle(name);
+                        mBuilder.setContentText("下载成功");
+                        mBuilder.setProgress(0, 0, false);
+                        mBuilder.setLights(Color.GREEN,1000,1000);
+                        mBuilder.setDefaults(NotificationCompat.DEFAULT_ALL);
+                        mBuilder.setOngoing(false);
+                        mNotificationManager.notify(NotificationId, mBuilder.build());
+                        mNotificationManager.cancel(NotificationId);
                     }
                 });
     }

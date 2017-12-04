@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.design.widget.AppBarLayout
@@ -20,14 +21,57 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <include layout="@layout/down_layout"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="10dp">
-    </android.support.design.widget.FloatingActionButton>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/deletelin"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"></android.support.v7.widget.RecyclerView>
 
-</android.support.design.widget.CoordinatorLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/deletelin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorselec"
+                android:background="@drawable/line"
+                android:id="@+id/nocheck"
+                android:text="选择"/>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"></LinearLayout>
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colordelete"
+                android:background="@drawable/line"
+                android:id="@+id/delete"
+                android:text="删除"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="MyThemeRed" />
 
-    <!-- 网易红为主色调 -->
+    <!-- 主色调 -->
     <style name="MyThemeRed" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!--选中状态icon的颜色和字体颜色-->

@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.home.TransitionActivity"
             android:screenOrientation="portrait"
@@ -30,18 +30,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.CourseDetilsActivity"
+        <activity
+            android:name=".ui.home.CourseDetilsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.login.LoginActivity"></activity>
-
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.login.LoginActivity" />
         <activity
             android:name=".widget.webview.WebViewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.download.DownloadActivity"></activity>
-
-        <activity android:name=".ui.download.HadDownloadActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.download.DownloadActivity" />
+        <activity
+            android:name=".ui.download.HadDownloadActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.me.TagerActivity" />
+        <activity android:name=".ui.me.SettingActivity"></activity>
     </application>
 
 </manifest>

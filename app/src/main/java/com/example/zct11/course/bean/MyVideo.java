@@ -10,6 +10,15 @@ public class MyVideo  implements ItemType {
     private String path;
     private String title;
     private String size;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getPath() {
         return path;

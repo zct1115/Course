@@ -129,7 +129,7 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
         Log.d("DownloadViewHolder进度", status.getPercent());
         mSize.setText(status.getFormatStatusString());
         Log.d("DownloadViewHolder下载速度", status.getFormatStatusString());
-        if (status.getDownloadSize() == status.getTotalSize()) {
+        if (status.getDownloadSize()!=0&&status.getDownloadSize() == status.getTotalSize()) {
             Log.d("DownloadViewHolder", "路径" + data.record.getSavePath());
             Log.d("DownloadViewHolder", "名称" + data.record.getSaveName());
             EventBus.getDefault().post(new Downloadmessage(data.record.getSavePath(), data.record.getSaveName(), status.getDownloadSize() / 1024 + "M"));

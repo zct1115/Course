@@ -8,7 +8,22 @@ public class Download {
     private String url;
     private String name;
     private String size;
+    private String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Download(String url, String name, String size, String id) {
+        this.url = url;
+        this.name = name;
+        this.size = size;
+        this.id = id;
+    }
 
     public Download(String url, String name, String size) {
         this.url = url;
