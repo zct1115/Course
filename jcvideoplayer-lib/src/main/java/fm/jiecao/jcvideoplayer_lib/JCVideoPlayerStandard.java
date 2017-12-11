@@ -68,7 +68,9 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void setUp(String url, int screen, Object... objects) {
         super.setUp(url, screen, objects);
-        if (objects.length == 0) return;
+        if (objects.length == 0) {
+            return;
+        }
         titleTextView.setText(objects[0].toString());
         if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
             fullscreenButton.setImageResource(R.drawable.jc_shrink);
@@ -186,6 +188,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                     showWifiDialog();
                     return;
                 }
+
                 startVideo();
             } else if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
                 onClickUiToggle();
@@ -308,13 +311,17 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         int position = getCurrentPositionWhenPlaying();
         int duration = getDuration();
         int progress = position * 100 / (duration == 0 ? 1 : duration);
-        if (progress != 0) bottomProgressBar.setProgress(progress);
+        if (progress != 0) {
+            bottomProgressBar.setProgress(progress);
+        }
     }
 
     @Override
     public void setBufferProgress(int bufferProgress) {
         super.setBufferProgress(bufferProgress);
-        if (bufferProgress != 0) bottomProgressBar.setSecondaryProgress(bufferProgress);
+        if (bufferProgress != 0) {
+            bottomProgressBar.setSecondaryProgress(bufferProgress);
+        }
     }
 
     @Override

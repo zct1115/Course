@@ -12,6 +12,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String db="course.db";
     private static final String table_name="down";
+    private static final String history_name="history";
     private static final int version=1;
 
     public DBHelper(Context context) {
@@ -23,11 +24,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(new StringBuilder().append("create table if not exists ").append(table_name).append("(id integer primary key,path varchar,name varchar,size varchar)").toString());
+        db.execSQL(new StringBuilder().append("create table if not exists ").append(history_name).append("(id integer primary key,url varchar,title varchar,img varchar)").toString());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
      db.execSQL(new StringBuilder().append("drop table if exsits ").append(table_name).toString());
+     db.execSQL(new StringBuilder().append("drop table if exsits ").append(history_name).toString());
      this.onCreate(db);
     }
 }

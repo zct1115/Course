@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.adapter.CoursepagerAdapter;
@@ -37,6 +38,7 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private View view;
     private ViewPager viewPager;
+    private TextView textView;
     private CoursepagerAdapter adapter;
     private SlidingTabLayout slidingPaneLayout;
     private JCVideoPlayerStandardAutoCompleteAfterFullscreen mJcVideoPlayerStandard;
@@ -49,13 +51,14 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
         StatusBarUtil.setTranslucent(this,1000);
         view=getWindow().getDecorView();
         back= (ImageView) findViewById(R.id.back);
+        textView=(TextView)findViewById(R.id.tool_title);
         back.setOnClickListener(this);
         viewPager= (ViewPager) findViewById(R.id.vp);
         mJcVideoPlayerStandard= (JCVideoPlayerStandardAutoCompleteAfterFullscreen) findViewById(R.id.jc_video);
         mJcVideoPlayerStandard.setUp("http://video.jiecao.fm/11/23/xin/%E5%81%87%E4%BA%BA.mp4"
                 , JCVideoPlayer.SCREEN_LAYOUT_NORMAL, "");
         ImageLoaderUtils.display(this,mJcVideoPlayerStandard.thumbImageView,"http://img1.sycdn.imooc.com/szimg/5909a1250001197e05400300-360-202.jpg");
-        JCVideoPlayer.setJcUserAction(new MyUserActionStandard());
+        JCVideoPlayer.setJcUserAction(new MyUserActionStandard("http://video.jiecao.fm/11/23/xin/%E5%81%87%E4%BA%BA.mp4","http://img1.sycdn.imooc.com/szimg/5909a1250001197e05400300-360-202.jpg",textView.getText().toString()));
         slidingPaneLayout= ViewFindUtils.find(view,R.id.tl);
         initData();
         adapter = new CoursepagerAdapter(getSupportFragmentManager(), mFragments);

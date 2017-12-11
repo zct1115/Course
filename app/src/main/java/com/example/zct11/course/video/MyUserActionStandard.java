@@ -1,6 +1,11 @@
 package com.example.zct11.course.video;
 
+import android.app.Application;
 import android.util.Log;
+
+import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.bean.History;
+import com.example.zct11.course.database.HistoryDBManager;
 
 import fm.jiecao.jcvideoplayer_lib.JCUserAction;
 import fm.jiecao.jcvideoplayer_lib.JCUserActionStandard;
@@ -10,11 +15,32 @@ import fm.jiecao.jcvideoplayer_lib.JCUserActionStandard;
  */
 
 public class MyUserActionStandard implements JCUserActionStandard {
+
+    private String url;
+    private String img;
+    private String title;
+    private HistoryDBManager historyDBManager;
+
+    public MyUserActionStandard() {
+    }
+
+    public MyUserActionStandard(String url, String img, String title) {
+        this.url = url;
+        this.img = img;
+        this.title = title;
+        historyDBManager=new HistoryDBManager(CourseApplication.getAppContext());
+    }
+
     @Override
     public void onEvent(int type, String url, int screen, Object... objects) {
         switch (type) {
             case JCUserAction.ON_CLICK_START_ICON:
                 Log.i("USER_EVENT", "ON_CLICK_START_ICON" + " title is : " + (objects.length == 0 ? "" : objects[0]) + " url is : " + url + " screen is : " + screen);
+                History history=new History(url,title,img);
+                if(!historyDBManager.checked(url)){
+                    historyDBManager.insert(history);
+                }
+
                 break;
             case JCUserAction.ON_CLICK_START_ERROR:
                 Log.i("USER_EVENT", "ON_CLICK_START_ERROR" + " title is : " + (objects.length == 0 ? "" : objects[0]) + " url is : " + url + " screen is : " + screen);

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.example.zct11.course.R;
 import com.example.zct11.course.ui.download.DownloadActivity;
 import com.example.zct11.course.ui.download.HadDownloadActivity;
+import com.example.zct11.course.ui.download.HistoryActivity;
 
 /**
  * Created by Administrator on 2017/10/19.
@@ -24,6 +25,7 @@ public class DownLoadFragment extends Fragment implements View.OnClickListener{
     private Toolbar toolbar;
     private LinearLayout loading;
     private LinearLayout loaded;
+    private LinearLayout history;
 
     public static DownLoadFragment getInstance (){
         DownLoadFragment downLoadFragment=new DownLoadFragment();
@@ -39,6 +41,8 @@ public class DownLoadFragment extends Fragment implements View.OnClickListener{
         toolbar.setTitle("我的视频");
         loading = (LinearLayout) v.findViewById(R.id.load);
         loaded = (LinearLayout) v.findViewById(R.id.loaded);
+        history=(LinearLayout) v.findViewById(R.id.history);
+        history.setOnClickListener(this);
         loaded.setOnClickListener(this);
         loading.setOnClickListener(this);
         return v;
@@ -53,6 +57,9 @@ public class DownLoadFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.loaded:
                 startActivity(new Intent(getActivity(), HadDownloadActivity.class));
+                break;
+            case R.id.history:
+                startActivity(new Intent(getActivity(), HistoryActivity.class));
                 break;
         }
     }
