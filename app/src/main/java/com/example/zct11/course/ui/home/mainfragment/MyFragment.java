@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.zct11.course.R;
 import com.example.zct11.course.ui.login.LoginActivity;
 import com.example.zct11.course.ui.me.SettingActivity;
+import com.example.zct11.course.ui.me.TagerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +38,7 @@ public class MyFragment extends Fragment implements View.OnClickListener {
     private TextView studyTime;
     private LinearLayout login;
     private LinearLayout setting;
+    private LinearLayout tager;
 
     public static MyFragment getInstance() {
         MyFragment myFragment = new MyFragment();
@@ -57,12 +59,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
         toolbar= (Toolbar) v.findViewById(R.id.tool);
         nologin= (TextView) v.findViewById(R.id.nologin);
         name= (TextView) v.findViewById(R.id.name);
+        tager= (LinearLayout) v.findViewById(R.id.tager);
         sexImg= (ImageView) v.findViewById(R.id.sex_img);
         studyTime= (TextView) v.findViewById(R.id.study_time);
         login= (LinearLayout) v.findViewById(R.id.login);
         setting=(LinearLayout) v.findViewById(R.id.setting);
         setting.setOnClickListener(this);
         nologin.setOnClickListener(this);
+        tager.setOnClickListener(this);
     }
 
 
@@ -75,6 +79,9 @@ public class MyFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));
+                break;
+            case R.id.tager:
+                startActivity(new Intent(getActivity(), TagerActivity.class));
                 break;
         }
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     tools:context="com.example.zct11.course.ui.me.TagerActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -22,15 +23,31 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tag"
+    <com.ramotion.expandingcollection.ECBackgroundSwitcherView
+        android:id="@+id/ec_bg_switcher_element"
         android:layout_width="match_parent"
-        android:layout_height="565dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="1.0"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appBarLayout"
+        android:foreground="@drawable/background_gradient" />
 
-</android.support.constraint.ConstraintLayout>
+    <com.example.zct11.course.widget.ItemsCountView
+        android:id="@+id/items_count_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="320dp"
+        android:clipChildren="false"
+        android:orientation="horizontal" />
+
+    <com.ramotion.expandingcollection.ECPagerView
+        android:id="@+id/ec_pager_element"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        app:cardHeaderHeightExpanded="300dp"
+        app:cardHeight="250dp"
+        app:cardWidth="250dp" />
+
+</RelativeLayout>

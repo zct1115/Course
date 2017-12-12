@@ -35,7 +35,7 @@
                   android:orientation="vertical">
                   <TextView
                       android:id="@+id/nologin"
-                      android:layout_marginLeft="12dp"
+                      android:layout_marginLeft="15dp"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:textSize="18sp"
@@ -58,14 +58,14 @@
                               android:id="@+id/name"
                               android:layout_width="wrap_content"
                               android:layout_height="wrap_content"
-                              android:textSize="26dp"
+                              android:textSize="22sp"
                               android:text="zct"/>
                           <ImageView
                               android:id="@+id/sex_img"
                               android:layout_marginLeft="10dp"
                               android:layout_width="25dp"
                               android:layout_height="25dp"
-                              android:src="@mipmap/ic_launcher_round"/>
+                              android:src="@mipmap/b"/>
                       </LinearLayout>
 
                       <TextView
@@ -74,6 +74,8 @@
                           android:layout_height="0dp"
                           android:layout_weight="1"
                           android:layout_marginLeft="20dp"
+                          android:textSize="12sp"
+                          android:textColor="@color/colorSubtitle"
                           android:text="学习时长：100小时"/>
                   </LinearLayout>
 
@@ -122,10 +124,13 @@
               </LinearLayout>
 
           </LinearLayout>
-
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorline"
+              />
           <LinearLayout
               android:background="@color/colorWhite"
-              android:layout_marginTop="5dp"
               android:layout_width="match_parent"
               android:layout_height="60dp"
               android:orientation="horizontal">
@@ -143,9 +148,13 @@
                   android:textSize="15sp"
                   android:text="最近学习"/>
           </LinearLayout>
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorline"
+              />
           <LinearLayout
               android:background="@color/colorWhite"
-              android:layout_marginTop="2dp"
               android:layout_width="match_parent"
               android:layout_height="60dp"
               android:orientation="horizontal">
@@ -163,9 +172,14 @@
                   android:textSize="15sp"
                   android:text="我的收藏"/>
           </LinearLayout>
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorline"
+              />
           <LinearLayout
+              android:id="@+id/tager"
               android:background="@color/colorWhite"
-              android:layout_marginTop="2dp"
               android:layout_width="match_parent"
               android:layout_height="60dp"
               android:orientation="horizontal">
@@ -183,10 +197,14 @@
                   android:textSize="15sp"
                   android:text="我的目标"/>
           </LinearLayout>
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorline"
+              />
           <LinearLayout
               android:id="@+id/setting"
               android:background="@color/colorWhite"
-              android:layout_marginTop="2dp"
               android:layout_width="match_parent"
               android:layout_height="60dp"
               android:orientation="horizontal">
@@ -204,6 +222,11 @@
                   android:textSize="15sp"
                   android:text="设置"/>
           </LinearLayout>
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorline"
+              />
       </LinearLayout>
     </ScrollView>
 

@@ -16,6 +16,8 @@
     <!--半透明-->
     <color name="colorBanTransparent">#11000000</color>
 
+    <color name="colorline">#000</color>
+
     <!--正文文字颜色-->
     <color name="colorContent">#ff333333</color>
     <!--水波纹或5.0以下选择器颜色-->
@@ -27,4 +29,14 @@
     <color name="colordelete">#f00</color>
     <color name="colorselec">#4cc</color>
 
+
+    <color name="transparent">#00ffffff</color>
+    <color name="bgGradientStart">#000000</color>
+    <color name="bgGradientEnd">#d8000000</color>
+    <color name="bgSolidDark">#55000000</color>
+
+    <color name="headGradientStart">#00ffffff</color>
+    <color name="headGradientCenter">#00ffffff</color>
+    <color name="headGradientEnd">#96000000</color>
+    <color name="colorListDivider">#e6e6e6</color>
 </resources>

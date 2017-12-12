@@ -13,11 +13,12 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:paddingTop="30dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp">
             <ImageView
+
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,11 +26,18 @@
         </RelativeLayout>
 
         <ImageView
-            android:src="@mipmap/v_icon"
+            android:src="@mipmap/login_img"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="V 课堂"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package fm.jiecao.jcvideoplayer_lib;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
@@ -180,7 +181,9 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
             }
         } else if (i == R.id.fullscreen) {
             Log.i(TAG, "onClick fullscreen [" + this.hashCode() + "] ");
-            if (currentState == CURRENT_STATE_AUTO_COMPLETE) return;
+            if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
+                return;
+            }
             if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
                 //quit fullscreen
                 backPress();
@@ -418,7 +421,9 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
     public void onPrepared() {
         Log.i(TAG, "onPrepared " + " [" + this.hashCode() + "] ");
 
-        if (currentState != CURRENT_STATE_PREPARING) return;
+        if (currentState != CURRENT_STATE_PREPARING) {
+            return;
+        }
         if (seekToInAdvance != 0) {
             JCMediaManager.instance().mediaPlayer.seekTo(seekToInAdvance);
             seekToInAdvance = 0;
@@ -560,7 +565,9 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
     public void onInfo(int what, int extra) {
         Log.d(TAG, "onInfo what - " + what + " extra - " + extra);
         if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START) {
-            if (currentState == CURRENT_STATE_PLAYING_BUFFERING_START) return;
+            if (currentState == CURRENT_STATE_PLAYING_BUFFERING_START) {
+                return;
+            }
             BACKUP_PLAYING_BUFFERING_STATE = currentState;
             setUiWitStateAndScreen(CURRENT_STATE_PLAYING_BUFFERING_START);//没这个case
             Log.d(TAG, "MEDIA_INFO_BUFFERING_START");
@@ -604,7 +611,9 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
             vpup = vpup.getParent();
         }
         if (currentState != CURRENT_STATE_PLAYING &&
-                currentState != CURRENT_STATE_PAUSE) return;
+                currentState != CURRENT_STATE_PAUSE) {
+            return;
+        }
         int time = seekBar.getProgress() * getDuration() / 100;
         JCMediaManager.instance().mediaPlayer.seekTo(time);
         Log.i(TAG, "seekTo " + time + " [" + this.hashCode() + "] ");
@@ -732,7 +741,9 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
 
     public int getDuration() {
         int duration = 0;
-        if (JCMediaManager.instance().mediaPlayer == null) return duration;
+        if (JCMediaManager.instance().mediaPlayer == null) {
+            return duration;
+        }
         try {
             duration = JCMediaManager.instance().mediaPlayer.getDuration();
         } catch (IllegalStateException e) {
@@ -747,14 +758,20 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
         int duration = getDuration();
         int progress = position * 100 / (duration == 0 ? 1 : duration);
         if (!mTouchingProgressBar) {
-            if (progress != 0) progressBar.setProgress(progress);
+            if (progress != 0) {
+                progressBar.setProgress(progress);
+            }
         }
-        if (position != 0) currentTimeTextView.setText(JCUtils.stringForTime(position));
+        if (position != 0) {
+            currentTimeTextView.setText(JCUtils.stringForTime(position));
+        }
         totalTimeTextView.setText(JCUtils.stringForTime(duration));
     }
 
     public void setBufferProgress(int bufferProgress) {
-        if (bufferProgress != 0) progressBar.setSecondaryProgress(bufferProgress);
+        if (bufferProgress != 0) {
+            progressBar.setSecondaryProgress(bufferProgress);
+        }
     }
 
     public void resetProgressAndTime() {
@@ -836,6 +853,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    @SuppressLint("WrongConstant")
     public static void startFullscreen(Context context, Class _class, String url, Object... objects) {
         hideSupportActionBar(context);
         JCUtils.getAppCompActivity(context).setRequestedOrientation(FULL_SCREEN_NORMAL_DELAY);
@@ -864,6 +882,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    @SuppressLint("RestrictedApi")
     public static void hideSupportActionBar(Context context) {
         if (ACTION_BAR_EXIST) {
             ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();
@@ -878,6 +897,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements View.OnClickL
         }
     }
 
+    @SuppressLint("RestrictedApi")
     public static void showSupportActionBar(Context context) {
         if (ACTION_BAR_EXIST) {
             ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();

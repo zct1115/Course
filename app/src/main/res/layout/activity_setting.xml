@@ -22,6 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
     <LinearLayout
+        android:id="@+id/clean"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
@@ -36,10 +37,11 @@
             android:textColor="@color/colorTabText"
             android:text="清空缓存"/>
         <TextView
+            android:id="@+id/num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
-            android:text="0M"/>
+            android:text="0K"/>
 
     </LinearLayout>
     <TextView
@@ -48,7 +50,7 @@
         android:background="@color/tabBackground"/>
 
     <LinearLayout
-        android:id="@+id/vision"
+        android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
