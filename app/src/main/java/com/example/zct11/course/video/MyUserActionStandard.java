@@ -2,6 +2,7 @@ package com.example.zct11.course.video;
 
 import android.app.Application;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.bean.History;
@@ -37,9 +38,14 @@ public class MyUserActionStandard implements JCUserActionStandard {
             case JCUserAction.ON_CLICK_START_ICON:
                 Log.i("USER_EVENT", "ON_CLICK_START_ICON" + " title is : " + (objects.length == 0 ? "" : objects[0]) + " url is : " + url + " screen is : " + screen);
                 History history=new History(url,title,img);
-                if(!historyDBManager.checked(url)){
+                if(historyDBManager.getData().size()==0){
                     historyDBManager.insert(history);
+                }else {
+                    if(historyDBManager.checked(url)){
+                        historyDBManager.insert(history);
+                    }
                 }
+
 
                 break;
             case JCUserAction.ON_CLICK_START_ERROR:

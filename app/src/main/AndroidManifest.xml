@@ -44,8 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.me.TagerActivity" />
         <activity android:name=".ui.me.SettingActivity"></activity>
-        <activity android:name=".ui.download.HistoryActivity"
-            android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".ui.download.HistoryActivity"></activity>
     </application>
 
 </manifest>

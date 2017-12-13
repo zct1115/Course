@@ -141,6 +141,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
 
     @Override
     public void onItemClick(int position) {
+
         //JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandardAutoCompleteAfterFullscreen.class, videos.get(position).getUrl(), videos.get(position).getTitle());
         JCVideoPlayer.startFullscreen(this, JCVideoPlayerStandardAutoCompleteAfterFullscreen.class, videos.get(position).getUrl(), videos.get(position).getTitle());
     }

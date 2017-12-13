@@ -45,7 +45,7 @@ public class HistoryDBManager {
     public boolean checked(String path){
         boolean flag=true;
         Cursor c=db.rawQuery("SELECT count(*) FROM history WHERE url='"+path+"'", null);
-       if(!c.moveToNext()){
+       if(c.moveToNext()){
           flag=false;
        }
         return flag;

@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String db="course.db";
     private static final String table_name="down";
     private static final String history_name="history";
-    private static final int version=1;
+    private static final int version=2;
 
     public DBHelper(Context context) {
         super(context, db, null, version);
