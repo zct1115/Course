@@ -28,7 +28,7 @@
 
     <color name="colordelete">#f00</color>
     <color name="colorselec">#4cc</color>
-
+    <color name="listSubTextColor">#ff888888</color>
 
     <color name="transparent">#00ffffff</color>
     <color name="bgGradientStart">#000000</color>

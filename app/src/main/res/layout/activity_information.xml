@@ -29,6 +29,7 @@
             android:layout_marginRight="20dp"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:id="@+id/img"
             android:src="@mipmap/head"/>
     </LinearLayout>
 
@@ -54,7 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"></LinearLayout>
         <TextView
-            android:layout_marginRight="20dp"
+            android:id="@+id/name_text"
+            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSubtitle"
@@ -84,7 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"></LinearLayout>
         <TextView
-            android:layout_marginRight="20dp"
+            android:id="@+id/sex_text"
+            android:layout_marginRight="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorSubtitle"
