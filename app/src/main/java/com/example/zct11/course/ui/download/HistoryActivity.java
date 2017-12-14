@@ -62,11 +62,9 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
     }
 
     private void initView() {
-
         deletelin = (LinearLayout) findViewById(R.id.deletelin);
         mAdapter = new HistoryVideoAdapter(videos, this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("历史纪录");
@@ -96,10 +94,8 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
                 return false;
             }
         });
-
         nocheck = (TextView) findViewById(R.id.nocheck);
         nocheck.setOnClickListener(this);
-
         delete = (TextView) findViewById(R.id.delete);
         delete.setOnClickListener(this);
         mAdapter.setOnItemClickListenr(this);
@@ -107,12 +103,12 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
         initData();
-
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        JCVideoPlayer.releaseAllVideos();
     }
 
     private void initData() {
@@ -145,6 +141,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
         //JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandardAutoCompleteAfterFullscreen.class, videos.get(position).getUrl(), videos.get(position).getTitle());
         JCVideoPlayer.startFullscreen(this, JCVideoPlayerStandardAutoCompleteAfterFullscreen.class, videos.get(position).getUrl(), videos.get(position).getTitle());
     }
+
 
     @Override
     public void onLongClick(int position) {
@@ -182,7 +179,6 @@ public class HistoryActivity extends AppCompatActivity implements HistoryVideoAd
                         }
                     }).setNegativeButton("取消", null).show();
                 }
-
                 break;
         }
     }

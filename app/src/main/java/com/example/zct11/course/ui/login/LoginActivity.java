@@ -1,6 +1,8 @@
 package com.example.zct11.course.ui.login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -20,7 +22,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.message.LoginMessage;
+import com.example.zct11.course.utils.ToastUtil;
 import com.example.zct11.course.widget.statusbar.StatusBarUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -83,8 +89,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                String userword = inputEmail.getText().toString();
                String password = inputPassword.getText().toString();
+               if(userword.equals("17875057401")&&password.equals("123456")){
+                   ToastUtil.showToast("登录成功");
+                   SharedPreferences sharedPreferences=getSharedPreferences("use", Context.MODE_PRIVATE);
+                   SharedPreferences.Editor editor=sharedPreferences.edit();
+                   editor.putBoolean("islogin",true);
+                   editor.commit();
+                   EventBus.getDefault().post(new LoginMessage(true));
+                   finish();
+               }else {
+                   ToastUtil.showToast("用户名或者密码有误！");
+               }
+               inputEmail.setText("");
+               inputPassword.setText("");
+               mProgressDialog.dismiss();
+               btnSign.setEnabled(true);
 
-               //presenter.login(userword,password);
                break;
            case R.id.tv_register:
 

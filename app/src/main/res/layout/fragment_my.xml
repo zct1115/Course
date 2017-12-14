@@ -32,52 +32,67 @@
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:gravity="center_vertical"
-                  android:orientation="vertical">
-                  <TextView
-                      android:id="@+id/nologin"
-                      android:layout_marginLeft="15dp"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textSize="18sp"
-                      android:text="点击登录"/>
+                  android:orientation="horizontal">
                   <LinearLayout
-                      android:id="@+id/login"
-                      android:layout_width="match_parent"
+                      android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:gravity="center_vertical"
                       android:layout_height="match_parent"
-                      android:visibility="gone"
                       android:orientation="vertical">
+                      <TextView
+                          android:id="@+id/nologin"
+                          android:layout_marginLeft="15dp"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textSize="18sp"
+                          android:text="点击登录"/>
                       <LinearLayout
-
+                          android:id="@+id/login"
                           android:layout_width="match_parent"
-                          android:layout_height="0dp"
-                          android:layout_weight="2"
-                          android:gravity="center_vertical"
-                          android:orientation="horizontal">
+                          android:layout_height="match_parent"
+                          android:visibility="gone"
+                          android:orientation="vertical">
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="0dp"
+                              android:layout_weight="2"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+                              <TextView
+                                  android:layout_marginLeft="10dp"
+                                  android:id="@+id/name"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:textSize="18sp"
+                                  android:text="请完善你的信息"/>
+                              <ImageView
+                                  android:visibility="gone"
+                                  android:id="@+id/sex_img"
+                                  android:layout_marginLeft="10dp"
+                                  android:layout_width="25dp"
+                                  android:layout_height="25dp"
+                                  android:src="@mipmap/b"/>
+                          </LinearLayout>
+
                           <TextView
-                              android:layout_marginLeft="40dp"
-                              android:id="@+id/name"
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:textSize="22sp"
-                              android:text="zct"/>
-                          <ImageView
-                              android:id="@+id/sex_img"
-                              android:layout_marginLeft="10dp"
-                              android:layout_width="25dp"
-                              android:layout_height="25dp"
-                              android:src="@mipmap/b"/>
+                              android:id="@+id/study_time"
+                              android:layout_width="match_parent"
+                              android:layout_height="0dp"
+                              android:layout_weight="1"
+                              android:layout_marginLeft="20dp"
+                              android:textSize="12sp"
+                              android:textColor="@color/colorSubtitle"
+                              android:text="学习时长：0小时"/>
                       </LinearLayout>
 
-                      <TextView
-                          android:id="@+id/study_time"
-                          android:layout_width="match_parent"
-                          android:layout_height="0dp"
-                          android:layout_weight="1"
-                          android:layout_marginLeft="20dp"
-                          android:textSize="12sp"
-                          android:textColor="@color/colorSubtitle"
-                          android:text="学习时长：100小时"/>
                   </LinearLayout>
+                  <ImageView
+                      android:visibility="gone"
+                      android:id="@+id/edit"
+                      android:paddingRight="20dp"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:src="@drawable/ic_border_color_black_24dp"></ImageView>
 
               </LinearLayout>
           </LinearLayout>
@@ -96,7 +111,7 @@
                       android:gravity="center"
                       android:layout_width="80dp"
                       android:layout_height="30dp"
-                      android:text="关注 1"/>
+                      android:text="关注 0"/>
               </LinearLayout>
               <LinearLayout
                   android:layout_width="0dp"
@@ -108,7 +123,7 @@
                       android:gravity="center"
                       android:layout_width="80dp"
                       android:layout_height="30dp"
-                      android:text="粉丝 0"/>
+                      android:text="提问 0"/>
               </LinearLayout>
               <LinearLayout
                   android:layout_width="0dp"
@@ -120,7 +135,7 @@
                       android:gravity="center"
                       android:layout_width="80dp"
                       android:layout_height="30dp"
-                      android:text="积分 0"/>
+                      android:text="签到 0"/>
               </LinearLayout>
 
           </LinearLayout>

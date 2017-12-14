@@ -1,8 +1,10 @@
 package com.example.zct11.course.ui.me;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,8 +16,12 @@ import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.message.LoginMessage;
 import com.example.zct11.course.ui.download.DownloadActivity;
 import com.example.zct11.course.utils.CleanMessageUtil;
+import com.example.zct11.course.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -66,6 +72,29 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.version:
                 break;
             case R.id.loaded:
+
+                final SharedPreferences sharedPreferences=getSharedPreferences("use", Context.MODE_PRIVATE);
+                if(!sharedPreferences.getBoolean("islogin",false)){
+                    ToastUtil.showToast("你还没有登录！！");
+                }else {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                    builder1.setTitle("提示");
+                    builder1.setMessage("确认退出登录？");
+                    builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putBoolean("islogin",false);
+                            editor.commit();
+                            EventBus.getDefault().post(new LoginMessage(false));
+                        }
+                    });
+                    builder1.setNegativeButton("取消",null);
+                    mDialog = builder1.create();
+                    mDialog.show();
+                }
+
                 break;
             case R.id.clean:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);

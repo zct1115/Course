@@ -48,7 +48,7 @@ public class DownloadActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        toolbar= (Toolbar) findViewById(R.id.tool);
+        toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("正在缓存的视频");
            /*回退键触发事件*/

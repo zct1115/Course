@@ -55,10 +55,10 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
         back.setOnClickListener(this);
         viewPager= (ViewPager) findViewById(R.id.vp);
         mJcVideoPlayerStandard= (JCVideoPlayerStandardAutoCompleteAfterFullscreen) findViewById(R.id.jc_video);
-        mJcVideoPlayerStandard.setUp("http://video.jiecao.fm/11/23/xin/%E5%81%87%E4%BA%BA.mp4"
+        mJcVideoPlayerStandard.setUp("http://newoss.maiziedu.com/android_app_sde_1.mp4"
                 , JCVideoPlayer.SCREEN_LAYOUT_NORMAL, "");
         ImageLoaderUtils.display(this,mJcVideoPlayerStandard.thumbImageView,"http://img1.sycdn.imooc.com/szimg/5909a1250001197e05400300-360-202.jpg");
-        JCVideoPlayer.setJcUserAction(new MyUserActionStandard("http://video.jiecao.fm/11/23/xin/%E5%81%87%E4%BA%BA.mp4","http://img1.sycdn.imooc.com/szimg/5909a1250001197e05400300-360-202.jpg",textView.getText().toString()));
+        JCVideoPlayer.setJcUserAction(new MyUserActionStandard("http://newoss.maiziedu.com/android_app_sde_1.mp4","http://img1.sycdn.imooc.com/szimg/5909a1250001197e05400300-360-202.jpg",textView.getText().toString()));
         slidingPaneLayout= ViewFindUtils.find(view,R.id.tl);
         initData();
         adapter = new CoursepagerAdapter(getSupportFragmentManager(), mFragments);

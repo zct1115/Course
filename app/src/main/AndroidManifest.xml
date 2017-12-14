@@ -43,8 +43,9 @@
             android:name=".ui.download.HadDownloadActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.me.TagerActivity" />
-        <activity android:name=".ui.me.SettingActivity"></activity>
-        <activity android:name=".ui.download.HistoryActivity"></activity>
+        <activity android:name=".ui.me.SettingActivity" />
+        <activity android:name=".ui.download.HistoryActivity" />
+        <activity android:name=".ui.me.InformationActivity"></activity>
     </application>
 
 </manifest>

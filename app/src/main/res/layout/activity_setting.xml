@@ -6,99 +6,96 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.zct11.course.ui.me.SettingActivity">
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <include layout="@layout/toolbar"></include>
 
-    </android.support.design.widget.AppBarLayout>
     <LinearLayout
         android:id="@+id/clean"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
+
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTabText"
-            android:text="清空缓存"/>
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="清空缓存"
+            android:textColor="@color/colorTabText" />
+
         <TextView
             android:id="@+id/num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
-            android:text="0K"/>
+            android:text="0K" />
 
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/tabBackground"/>
+        android:background="@color/tabBackground" />
 
     <LinearLayout
         android:id="@+id/version"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
+
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTabText"
-            android:text="版本信息"/>
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="版本信息"
+            android:textColor="@color/colorTabText" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
-            android:src="@drawable/ic_chevron_right"/>
+            android:src="@drawable/ic_chevron_right" />
 
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/tabBackground"/>
+        android:background="@color/tabBackground" />
 
     <LinearLayout
         android:id="@+id/loaded"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingLeft="20dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:paddingRight="10dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_loginout"/>
+            android:src="@drawable/ic_loginout" />
+
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTabText"
-            android:text="退出登录"/>
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="退出登录"
+            android:textColor="@color/colorTabText" />
 
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/tabBackground"/>
+        android:background="@color/tabBackground" />
 </LinearLayout>
