@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zct11.course.R;
-import com.example.zct11.course.adapter.DownloadAdapter;
+//import com.example.zct11.course.adapter.DownloadAdapter;
 import com.example.zct11.course.adapter.VideoAdapter;
 import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.bean.Download;
@@ -42,9 +42,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import zlc.season.practicalrecyclerview.PracticalRecyclerView;
-import zlc.season.rxdownload2.RxDownload;
 
 /**
  * Created by zct11 on 2017/11/4.
@@ -154,7 +154,8 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
 
     @Override
     public void onItemClick(int position) {
-        JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, videos.get(position).getPath(), videos.get(position).getTitle());
+        //JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, videos.get(position).getPath(), videos.get(position).getTitle());
+        //JCVideoPlayer.
     }
 
     @Override
@@ -177,9 +178,6 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                           /* for(Integer key:mAdapter.getMap().keySet()){
-                                Toast.makeText(HadDownloadActivity.this, mAdapter.getMap().get(key).toString(), Toast.LENGTH_SHORT).show();
-                            }*/
                            Iterator<Integer> integers=mAdapter.getMap().keySet().iterator();
                            while (integers.hasNext()){
                                Integer key=integers.next();
@@ -194,14 +192,6 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
                             deletelin.setVisibility(View.GONE);
                             mAdapter.setIsshowBox(false);
                             mAdapter.notifyDataSetChanged();
-                            //Set<Integer> da = mAdapter.getMap().keySet();
-                            /*for(int i=0;i<mAdapter.getMap().size();i++){
-                                Toast.makeText(HadDownloadActivity.this, "mAdapter.getMap().keySet():" + mAdapter.getMap().keySet(), Toast.LENGTH_SHORT).show();
-                               // Toast.makeText(HadDownloadActivity.this, mAdapter.getMap().get(i).toString(), Toast.LENGTH_SHORT).show();
-                               *//* if(mAdapter.getMap().get(i).toString().equals("true")){
-
-                                }*//*
-                            }*/
                         }
                     }).setNegativeButton("取消", null).show();
                 }

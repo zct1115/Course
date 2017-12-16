@@ -14,11 +14,16 @@ public class FolderManager {
     /**
      * 应用程序在SD卡上的主目录名称
      */
-    private final static String APP_FOLDER_NAME = "Enjoy";
+    private final static String APP_FOLDER_NAME = "Course";
     /**
      * 存放图片目录名
      */
     private final static String PHOTO_FOLDER_NAME = "photo";
+
+    /**
+     * 存放视频目录名
+     */
+    private final static String PHOTO_VIDEO_NAME = "video";
     /**
      * 存放闪退日志目录名
      */
@@ -54,6 +59,23 @@ public class FolderManager {
         if (appFolder != null) {
 
             File photoFolder = new File(appFolder, PHOTO_FOLDER_NAME);
+            return createOnNotFound(photoFolder);
+
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 获取应用存放图片的目录
+     *
+     * @return 成功则返回目录名，失败则返回null
+     */
+    public static File getVideoFolder() {
+        File appFolder = getAppFolder();
+        if (appFolder != null) {
+
+            File photoFolder = new File(appFolder, PHOTO_VIDEO_NAME);
             return createOnNotFound(photoFolder);
 
         } else {

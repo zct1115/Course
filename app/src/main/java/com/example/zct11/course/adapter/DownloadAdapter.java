@@ -2,7 +2,6 @@ package com.example.zct11.course.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-
 import com.example.zct11.course.ui.download.DownloadItem;
 
 import zlc.season.practicalrecyclerview.AbstractAdapter;

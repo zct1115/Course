@@ -48,7 +48,8 @@
         <activity android:name=".ui.me.SettingActivity" />
         <activity android:name=".ui.download.HistoryActivity" />
         <activity android:name=".ui.me.InformationActivity" />
-        <activity android:name=".ui.me.UserInformationActivity"></activity>
+        <activity android:name=".ui.me.UserInformationActivity" />
+        <activity android:name=".ui.me.MyLoveActivity"></activity>
     </application>
 
 </manifest>

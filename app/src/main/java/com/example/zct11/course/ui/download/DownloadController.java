@@ -3,8 +3,8 @@ package com.example.zct11.course.ui.download;
 import android.widget.Button;
 import android.widget.TextView;
 
-import zlc.season.rxdownload2.entity.DownloadEvent;
-import zlc.season.rxdownload2.entity.DownloadFlag;
+/*import zlc.season.rxdownload2.entity.DownloadEvent;
+import zlc.season.rxdownload2.entity.DownloadFlag;*/
 
 /**
  * Author: Season(ssseasonnn@gmail.com)
@@ -28,7 +28,7 @@ public class DownloadController {
         mState.setText(mStatus, mAction);
     }
 
-    public void setEvent(DownloadEvent event) {
+   /* public void setEvent(DownloadEvent event) {
         int flag = event.getFlag();
         switch (flag) {
             case DownloadFlag.NORMAL:
@@ -53,7 +53,7 @@ public class DownloadController {
                 setState(new Deleted());
                 break;
         }
-    }
+    }*/
 
     public void handleClick(Callback callback) {
         mState.handleClick(callback);

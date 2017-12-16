@@ -13,9 +13,20 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.bean.Download;
+import com.example.zct11.course.bean.Downloading;
 import com.example.zct11.course.client.NetworkUtil;
 import com.example.zct11.course.ui.download.DownLoadModel;
 import com.example.zct11.course.ui.download.DownloadActivity;
+import com.example.zct11.course.utils.FolderManager;
+
+import org.greenrobot.eventbus.EventBus;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import zlc.season.rxdownload3.RxDownload;
+import zlc.season.rxdownload3.core.Status;
 
 /**
  * Created by zct11 on 2017/10/23.
@@ -25,7 +36,8 @@ public class Study extends Fragment implements View.OnClickListener{
 
     private ImageButton down;
     private AlertDialog mDialog;
-    private int id=0;
+    private Disposable disposable;
+    private Status currentStatus = new Status();
 
     public static Study getInstance(){
         return new Study();
@@ -43,9 +55,8 @@ public class Study extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        id++;
         if(NetworkUtil.isNetworkAvailable(getContext())){
-            new DownLoadModel(id).downLoad("http://pic.58pic.com/58pic/13/76/85/69x58PICm2u_1024.jpg","android");
+            //new DownLoadModel(id).downLoad("http://img.zcool.cn/community/01080755c1edaf32f87528a18e9840.jpg@900w_1l_2o_100sh.jpg","android", FolderManager.getPhotoFolder().getPath());
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("提示");
             builder.setMessage("正在为你下载");
@@ -53,6 +64,9 @@ public class Study extends Fragment implements View.OnClickListener{
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     mDialog.dismiss();
+                    create("http://img.zcool.cn/community/01080755c1edaf32f87528a18e9840.jpg@900w_1l_2o_100sh.jpg");
+                    start("http://img.zcool.cn/community/01080755c1edaf32f87528a18e9840.jpg@900w_1l_2o_100sh.jpg");
+                    //EventBus.getDefault().post(new Download("http://img.zcool.cn/community/01080755c1edaf32f87528a18e9840.jpg@900w_1l_2o_100sh.jpg","android","10M"));
                     startActivity(new Intent(getActivity(), DownloadActivity.class));
                 }
             });
@@ -62,5 +76,23 @@ public class Study extends Fragment implements View.OnClickListener{
             Toast.makeText(getActivity(), "请检查当前的网络是否连接！！！", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void create(String url) {
+        disposable = RxDownload.INSTANCE.create(url)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Status>() {
+                    @Override
+                    public void accept(Status status) throws Exception {
+                        currentStatus = status;
+                        setProgress(status);
+                    }
+                });
+    }
+    private void start(String url) {
+        RxDownload.INSTANCE.start(url).subscribe();
+    }
+    private void setProgress(Status status) {
+        EventBus.getDefault().post(new Downloading((int)status.getTotalSize(),(int)status.getDownloadSize(),status.percent(),status.formatString()));
     }
 }

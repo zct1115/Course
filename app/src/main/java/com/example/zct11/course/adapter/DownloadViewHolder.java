@@ -31,16 +31,16 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import zlc.season.practicalrecyclerview.AbstractAdapter;
 import zlc.season.practicalrecyclerview.AbstractViewHolder;
-import zlc.season.rxdownload2.RxDownload;
+/*import zlc.season.rxdownload2.RxDownload;
 import zlc.season.rxdownload2.entity.DownloadEvent;
 import zlc.season.rxdownload2.entity.DownloadFlag;
 import zlc.season.rxdownload2.entity.DownloadStatus;
-import zlc.season.rxdownload2.function.Utils;
+import zlc.season.rxdownload2.function.Utils;*/
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static zlc.season.rxdownload2.function.Utils.dispose;
+/*import static zlc.season.rxdownload2.function.Utils.dispose;
 import static zlc.season.rxdownload2.function.Utils.empty;
-import static zlc.season.rxdownload2.function.Utils.log;
+import static zlc.season.rxdownload2.function.Utils.log;*/
 
 /**
  * Created by zct11 on 2017/11/3.
@@ -64,10 +64,31 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
     private Context mContext;
     private DownloadItem data;
 
-    private RxDownload mRxDownload;
+    //private RxDownload mRxDownload;
     private int flag;
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void setData(DownloadItem data) {
+
+    }
+
     public DownloadViewHolder(ViewGroup parent, AbstractAdapter adapter) {
+        super(parent, R.layout.download_manager_item);
+        this.mAdapter = adapter;
+        mContext = parent.getContext();
+       // initView();
+      //  mRxDownload = RxDownload.getInstance(mContext);
+        dbManager = new DBManager(mContext);
+        mDownloadController = new DownloadController(mStatusText, mActionButton);
+    }
+
+
+    /*public DownloadViewHolder(ViewGroup parent, AbstractAdapter adapter) {
         super(parent, R.layout.download_manager_item);
         this.mAdapter = adapter;
         mContext = parent.getContext();
@@ -134,7 +155,7 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
             Log.d("DownloadViewHolder", "名称" + data.record.getSaveName());
             EventBus.getDefault().post(new Downloadmessage(data.record.getSavePath(), data.record.getSaveName(), status.getDownloadSize() / 1024 + "M"));
             delete();
-            Download download=new Download(data.record.getSavePath()+"/"+data.record.getId()+".mp4",data.record.getSaveName(),status.getDownloadSize() / 1024 + "KB");
+            Download download=new Download(data.record.getSavePath()+"/"+data.record.getId()+".mp4",data.record.getSaveName(),status.getFormatTotalSize());
             dbManager.insert(download);
         }
 
@@ -195,8 +216,8 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
     private void open() {
         File[] files = mRxDownload.getRealFiles(data.record.getUrl());
         if (files != null) {
-            /*Intent intent = openFile(files[0]);
-            mContext.startActivity(intent);*/
+            *//*Intent intent = openFile(files[0]);
+            mContext.startActivity(intent);*//*
         } else {
             Toast.makeText(mContext, "File not exists", Toast.LENGTH_SHORT).show();
         }
@@ -225,5 +246,5 @@ public class DownloadViewHolder extends AbstractViewHolder<DownloadItem> impleme
     private void pause() {
         mRxDownload.pauseServiceDownload(data.record.getUrl()).subscribe();
     }
-
+*/
 }
