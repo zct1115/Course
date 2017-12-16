@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:text="5分钟"/>
+                android:text="10分钟"/>
             <ImageButton
                 android:id="@+id/down"
                 android:layout_gravity="center"

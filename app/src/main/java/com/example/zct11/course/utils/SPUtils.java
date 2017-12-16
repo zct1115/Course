@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 
 import com.example.zct11.course.app.CourseApplication;
 
+import java.io.File;
+
 
 /**
  * 对SharedPreference文件中的各种类型的数据进行存取操作
@@ -71,6 +73,8 @@ public class SPUtils {
         }
         sp.edit().putBoolean(key, value).commit();
     }
+
+
 
     public static Boolean getSharedBooleanData(Context context, String key) {
         if (sp == null) {

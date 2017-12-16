@@ -8,6 +8,8 @@
     <color name="colorTheme">#44c0e6</color>
     <color name="colorWhite">#fff</color>
 
+    <color name="allassess">#FFA500</color>
+
     <!--tab标签栏文字的颜色-->
     <color name="colorTabText">#585858</color>
     <color name="colorbg">#e1e3e3</color>

@@ -98,4 +98,9 @@
         <item name="android:textColor">#ffffff</item>
     </style>
 
+
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
 </resources>

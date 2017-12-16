@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/li"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
@@ -23,15 +24,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:background="#00000000"
-            android:elevation="10dp"
-            android:gravity="right">
+            android:elevation="10dp">
 
             <android.support.v7.widget.CardView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:elevation="10dp"
                 app:cardCornerRadius="5dp">
 
@@ -52,13 +52,14 @@
         android:background="@color/bs_divider_color"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:orientation="horizontal">
         <com.example.zct11.course.widget.CircleImageView
+            android:id="@+id/people"
             android:layout_marginLeft="30dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@mipmap/touxiang"/>
         <LinearLayout
             android:layout_width="0dp"
@@ -66,29 +67,43 @@
             android:layout_marginLeft="15dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:text="纳哥"/>
+                android:layout_weight="3"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:text="纳哥"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"></LinearLayout>
+                <TextView
+                    android:paddingRight="20dp"
+                    android:gravity="right|center"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:textColor="#ccc"
+                    android:text="1小时前"/>
+            </LinearLayout>
+
             <TextView
-                android:layout_marginTop="2dp"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                android:textSize="10dp"
-                android:textColor="#ccc"
-                android:text="1小时前"/>
-            <TextView
-                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_weight="2"
                 android:layout_height="0dp"
                 android:textColor="@color/colorTabText"
+                android:textSize="10sp"
                 android:text="讲的不错！！！！"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/num_suppor"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,11 +111,12 @@
             android:text="2"
             android:textColor="#ccc"/>
         <ImageView
+            android:id="@+id/suppor"
             android:layout_gravity="center"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_dianzan_on"/>
+            android:src="@drawable/ic_dianzan"/>
     </LinearLayout>
     <ImageView
         android:layout_marginLeft="15dp"
@@ -108,4 +124,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/bs_divider_color"/>
+
+
 </LinearLayout>

@@ -14,6 +14,7 @@ public class Informationimg {
         this.file = file;
     }
 
+
     public File getFile() {
         return file;
     }

@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.message.Informationimg;
 import com.example.zct11.course.message.LoginMessage;
 import com.example.zct11.course.ui.download.DownloadActivity;
 import com.example.zct11.course.utils.CleanMessageUtil;
+import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -73,8 +75,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.loaded:
 
-                final SharedPreferences sharedPreferences=getSharedPreferences("use", Context.MODE_PRIVATE);
-                if(!sharedPreferences.getBoolean("islogin",false)){
+                if(SPUtils.getSharedBooleanData(CourseApplication.getAppContext(),"islogin")==false){
                     ToastUtil.showToast("你还没有登录！！");
                 }else {
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
@@ -83,10 +84,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     builder1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
-                            SharedPreferences.Editor editor=sharedPreferences.edit();
-                            editor.putBoolean("islogin",false);
-                            editor.commit();
+                            SPUtils.setSharedBooleanData(CourseApplication.getAppContext(),"islogin",false);
                             EventBus.getDefault().post(new LoginMessage(false));
                         }
                     });

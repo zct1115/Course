@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.zct11.course">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,11 +13,12 @@
     <application
         android:name=".app.CourseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/v_icon"
+        android:icon="@mipmap/vclass_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/v_icon"
+        android:roundIcon="@mipmap/vclass_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait" />
@@ -45,7 +47,8 @@
         <activity android:name=".ui.me.TagerActivity" />
         <activity android:name=".ui.me.SettingActivity" />
         <activity android:name=".ui.download.HistoryActivity" />
-        <activity android:name=".ui.me.InformationActivity"></activity>
+        <activity android:name=".ui.me.InformationActivity" />
+        <activity android:name=".ui.me.UserInformationActivity"></activity>
     </application>
 
 </manifest>

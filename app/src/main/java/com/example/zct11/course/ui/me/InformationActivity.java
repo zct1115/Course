@@ -30,8 +30,10 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loading.SweetAlertDialog;
 import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.message.InformationLogin;
 import com.example.zct11.course.message.InformationMessage;
 import com.example.zct11.course.message.InformationSexMessage;
 import com.example.zct11.course.message.Informationimg;
@@ -56,6 +58,9 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
     private TextView name_text;
     private TextView sex_text;
     private ImageView img;
+    private ImageView save;
+
+    private File getFile;
 
     //请求开启相册
     private static final int REQUEST_PICK_IMAGE = 3;
@@ -83,6 +88,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         name_text= (TextView) findViewById(R.id.name_text);
         sex_text= (TextView) findViewById(R.id.sex_text);
         img= (ImageView) findViewById(R.id.img);
+        save= (ImageView) findViewById(R.id.save);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("完善你的信息");
@@ -97,10 +103,17 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
         head= (LinearLayout) findViewById(R.id.head);
         name= (LinearLayout) findViewById(R.id.name);
         sex= (LinearLayout) findViewById(R.id.sex);
-
+        save.setOnClickListener(this);
         head.setOnClickListener(this);
         name.setOnClickListener(this);
         sex.setOnClickListener(this);
+
+        Bitmap bitmap=BitmapUtils.decodeBitmapFromFile(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"file"),img.getDrawable().getBounds().width(),img.getDrawable().getBounds().height());
+        if(bitmap!=null){
+            img.setImageBitmap(bitmap);
+        }
+        name_text.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"name"));
+        sex_text.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"sex"));
     }
 
     @SuppressLint("RestrictedApi")
@@ -177,7 +190,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
                 View view1 = inflater1.inflate(R.layout.item_edit, (ViewGroup) findViewById(R.id.ll_root), false);
                 final EditText editText = (EditText) view1.findViewById(R.id.ed_content);
                 //设置用户名
-                editText.setText("");
+                editText.setText(name_text.getText().toString());
                 //显示光标
                 editText.setSelection(editText.getText().length());
                 builder1.setView(view1, 100, 30, 100, 30);
@@ -243,6 +256,26 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
                 dialog2.show();
 
                 break;
+            case R.id.save:
+                new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("保存成功！")
+                        .setConfirmText("OK")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                if(getFile!=null){
+                                    SPUtils.setSharedStringData(CourseApplication.getAppContext(),"file",getFile.toString());
+                                }else {
+                                    SPUtils.setSharedStringData(CourseApplication.getAppContext(),"file",SPUtils.getSharedStringData(CourseApplication.getAppContext(),"file"));
+                                }
+                                SPUtils.setSharedStringData(CourseApplication.getAppContext(),"name",name_text.getText().toString());
+                                SPUtils.setSharedStringData(CourseApplication.getAppContext(),"sex",sex_text.getText().toString());
+                                EventBus.getDefault().post(new InformationLogin(getFile,name_text.getText().toString(),sex_text.getText().toString()));
+                                sDialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
         }
     }
 
@@ -282,6 +315,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
             File photoFile = mCapturePhotoHelper.getPhoto();
             Log.d("InformationActivity", "photoFile:" + photoFile);
             //BitmapUtils.displayToGallery(this, photoFile);
+            getFile=photoFile;
             EventBus.getDefault().post(new Informationimg(photoFile));
 
         } else if (requestCode == REQUEST_PICK_IMAGE) {
@@ -304,6 +338,7 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
                 startActivityForResult(intent, REQUEST_PICKER_AND_CROP_2);
             }
         } else if (requestCode == REQUEST_PICKER_AND_CROP_2) {
+            getFile=tempFile.getAbsoluteFile();
             EventBus.getDefault().post(new Informationimg(tempFile.getAbsoluteFile()));
 
         } else {
@@ -431,7 +466,10 @@ public class InformationActivity extends AppCompatActivity implements View.OnCli
     @Subscribe
     public void imgchange(Informationimg informationimg){
         //存放到相册
-        ImageLoaderUtils.display(InformationActivity.this,img,informationimg.getFile());
+        Bitmap bitmap=BitmapUtils.decodeBitmapFromFile(informationimg.getFile(),img.getDrawable().getBounds().width(),img.getDrawable().getBounds().height());
+        if(bitmap!=null){
+            img.setImageBitmap(bitmap);
+        }
     }
 
     @Subscribe

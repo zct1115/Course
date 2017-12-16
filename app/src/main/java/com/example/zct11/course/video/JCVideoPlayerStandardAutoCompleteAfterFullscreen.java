@@ -26,7 +26,6 @@ public class JCVideoPlayerStandardAutoCompleteAfterFullscreen extends JCVideoPla
         } else {
             super.onAutoCompletion();
         }
-
     }
 
 }

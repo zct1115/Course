@@ -22,7 +22,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.message.LoginMessage;
+import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
 import com.example.zct11.course.widget.statusbar.StatusBarUtil;
 
@@ -91,10 +93,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                String password = inputPassword.getText().toString();
                if(userword.equals("17875057401")&&password.equals("123456")){
                    ToastUtil.showToast("登录成功");
-                   SharedPreferences sharedPreferences=getSharedPreferences("use", Context.MODE_PRIVATE);
-                   SharedPreferences.Editor editor=sharedPreferences.edit();
-                   editor.putBoolean("islogin",true);
-                   editor.commit();
+                   SPUtils.setSharedBooleanData(CourseApplication.getAppContext(),"islogin",true);
                    EventBus.getDefault().post(new LoginMessage(true));
                    finish();
                }else {

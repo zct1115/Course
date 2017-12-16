@@ -1,9 +1,15 @@
 package com.example.zct11.course.ui.home;
 
+import android.content.Context;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +26,11 @@ import com.example.zct11.course.ui.home.mainfragment.MainFragment;
 import com.example.zct11.course.ui.home.mainfragment.MessageFragment;
 import com.example.zct11.course.ui.home.mainfragment.MyFragment;
 import com.example.zct11.course.utils.ImageLoaderUtils;
+import com.example.zct11.course.utils.ToastUtil;
 import com.example.zct11.course.utils.ViewFindUtils;
 import com.example.zct11.course.video.JCVideoPlayerStandardAutoCompleteAfterFullscreen;
 import com.example.zct11.course.video.MyUserActionStandard;
+import com.example.zct11.course.widget.MyPopupWindow;
 import com.example.zct11.course.widget.statusbar.StatusBarUtil;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -43,6 +51,9 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
     private SlidingTabLayout slidingPaneLayout;
     private JCVideoPlayerStandardAutoCompleteAfterFullscreen mJcVideoPlayerStandard;
     private ImageView back;
+    private MyPopupWindow myPopupWindow;
+    private ImageView love;
+    private boolean flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +63,11 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
         view=getWindow().getDecorView();
         back= (ImageView) findViewById(R.id.back);
         textView=(TextView)findViewById(R.id.tool_title);
+        love=(ImageView) findViewById(R.id.love);
+        love.setOnClickListener(this);
         back.setOnClickListener(this);
         viewPager= (ViewPager) findViewById(R.id.vp);
+        initPop();
         mJcVideoPlayerStandard= (JCVideoPlayerStandardAutoCompleteAfterFullscreen) findViewById(R.id.jc_video);
         mJcVideoPlayerStandard.setUp("http://newoss.maiziedu.com/android_app_sde_1.mp4"
                 , JCVideoPlayer.SCREEN_LAYOUT_NORMAL, "");
@@ -70,16 +84,71 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
             public void onTabSelect(int position) {
 
                 viewPager.setCurrentItem(position);
+                if(position==2){
+
+      /*  edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i==KeyEvent.KEYCODE_BACK){
+                    myPopupWindow.dismiss();
+                    return true;
+                }
+                return false;
+            }
+        });
+        myPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(myPopupWindow.isShowing()){
+                    return  true;
+                }
+                return false;
+            }
+        });*/
+                    myPopupWindow.showAtLocation(viewPager, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+
+                }else {
+                    myPopupWindow.dismiss();
+                }
             }
 
             @Override
             public void onTabReselect(int position) {
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(position==2){
+                    myPopupWindow.showAtLocation(viewPager, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+                }else {
+                    myPopupWindow.dismiss();
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
         viewPager.setCurrentItem(0);
         viewPager.setOffscreenPageLimit(4);
 
+    }
+
+    private void initPop() {
+        LayoutInflater inflater1= (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View edit=inflater1.inflate(R.layout.assess,null,false);
+        TextView text=edit.findViewById(R.id.text);
+        ImageView send=edit.findViewById(R.id.send);
+        myPopupWindow=new MyPopupWindow(CourseDetilsActivity.this,edit);
+        myPopupWindow.setFocusable(true);
+        myPopupWindow.setOutsideTouchable(false);
     }
 
     private void initData() {
@@ -103,8 +172,33 @@ public class CourseDetilsActivity extends AppCompatActivity implements View.OnCl
         super.onBackPressed();
     }
 
+  /*  @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(myPopupWindow!=null&&myPopupWindow.isShowing()){
+            return false;
+        }
+        return super.dispatchTouchEvent(ev);
+    }*/
+
     @Override
     public void onClick(View v) {
-        finish();
+
+        switch (v.getId()){
+            case R.id.back:
+                finish();
+                break;
+            case R.id.love:
+                if(!flag){
+                    love.setImageDrawable(getResources().getDrawable(R.drawable.ic_love));
+                    ToastUtil.showToast("收藏成功");
+                    flag=true;
+                }else {
+                    love.setImageDrawable(getResources().getDrawable(R.drawable.ic_nolove));
+                    ToastUtil.showToast("取消收藏");
+                    flag=false;
+                }
+                break;
+        }
+
     }
 }
