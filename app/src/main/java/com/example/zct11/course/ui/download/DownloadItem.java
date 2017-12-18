@@ -22,6 +22,10 @@ public class DownloadItem implements ItemType {
         this.title = title;
     }
 
+    public DownloadItem(String img) {
+        this.img = img;
+    }
+
     public String getPath() {
         return path;
     }

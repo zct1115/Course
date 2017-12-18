@@ -14,10 +14,12 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.bean.CustomMission;
 import com.example.zct11.course.client.NetworkUtil;
 import com.example.zct11.course.database.DBManager;
 import com.example.zct11.course.message.IsDownload;
 import com.example.zct11.course.ui.download.DownloadActivity;
+import com.example.zct11.course.ui.download.DownloadItem;
 import com.example.zct11.course.ui.download.HadDownloadActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,6 +30,7 @@ import io.reactivex.functions.Consumer;
 import zlc.season.rxdownload3.RxDownload;
 import zlc.season.rxdownload3.core.Downloading;
 import zlc.season.rxdownload3.core.Failed;
+import zlc.season.rxdownload3.core.Mission;
 import zlc.season.rxdownload3.core.Normal;
 import zlc.season.rxdownload3.core.Status;
 import zlc.season.rxdownload3.core.Suspend;
@@ -44,9 +47,10 @@ public class Study extends Fragment implements View.OnClickListener{
     private AlertDialog mDialog;
     private Disposable disposable;
     private Status currentStatus = new Status();
-    private String url="https://d.pcs.baidu.com/file/d376574c694fbf87a2c16879f3bab202?fid=3733671192-250528-1118259804516888&time=1513517761&rt=pr&sign=FDTAERVCY-DCb740ccc5511e5e8fedcff06b081203-CNPYnTl%2Fz8ysya17QAVl2y02Fpo%3D&expires=8h&chkv=1&chkbd=1&chkpc=et&dp-logid=8138361981341811194&dp-callid=0&r=297084619";
+    private boolean flog=false;
+    private String url="https://d.pcs.baidu.com/file/f1f61baf89a30ab34d71e5837f02caae?fid=3733671192-250528-184852326148573&time=1513597282&rt=pr&sign=FDTAERVCY-DCb740ccc5511e5e8fedcff06b081203-vt4CvGmbJSkDoqysYdbpWh4o2MU%3D&expires=8h&chkv=1&chkbd=1&chkpc=et&dp-logid=8159708363089993386&dp-callid=0&r=157814781";
     private String title="android";
-    private String img="http://img.zcool.cn/community/01080755c1edaf32f87528a18e9840.jpg@900w_1l_2o_100sh.jpg";
+    private String img="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514205141&di=f50482fa23171b74fb3dd2f3700b65ed&imgtype=jpg&er=1&src=http%3A%2F%2Fi2.sinaimg.cn%2Fgm%2F2014%2F0901%2FU10515P115DT20140901113257.jpg";
     public static Study getInstance(){
         return new Study();
     }
@@ -57,7 +61,8 @@ public class Study extends Fragment implements View.OnClickListener{
         View v=inflater.inflate(R.layout.fragment_study,null);
         down= (ImageButton) v.findViewById(R.id.down);
         down.setOnClickListener(this);
-
+        delete();
+        create();
         return v;
     }
 
@@ -65,29 +70,7 @@ public class Study extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
         if(NetworkUtil.isNetworkAvailable(getContext())){
-
-            DBManager manager=new DBManager(getActivity());
-            Log.d("Study", "manager.checked(url):" + manager.checked(url));
-
             down();
-          /*
-            if(manager.checked(url)){
-              down();
-            }else {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
-                builder1.setTitle("提示");
-                builder1.setMessage("已下载该视频");
-                builder1.setPositiveButton("前往查看", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mDialog.dismiss();
-                        startActivity(new Intent(getActivity(), HadDownloadActivity.class));
-                    }
-                });
-                mDialog = builder1.create();
-                mDialog.show(); ;
-            }*/
-
         }else {
             Toast.makeText(getActivity(), "请检查当前的网络是否连接！！！", Toast.LENGTH_SHORT).show();
         }
@@ -95,16 +78,14 @@ public class Study extends Fragment implements View.OnClickListener{
     }
 
     private void down(){
-        create();
         start();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("提示");
         builder.setMessage("正在为你下载");
-        builder.setPositiveButton("前往查看", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mDialog.dismiss();
-                startActivity(new Intent(getActivity(), DownloadActivity.class));
             }
         });
         mDialog = builder.create();
@@ -132,11 +113,18 @@ public class Study extends Fragment implements View.OnClickListener{
                         currentStatus = status;
                     }
                 });
+        flog=true;
     }
 
 
     private void start() {
         RxDownload.INSTANCE.start(url).subscribe();
+    }
+    private void delete(){
+        RxDownload.INSTANCE.delete(url,true);
+        RxDownload.INSTANCE.clear(url);
+
+
     }
     private void stop() {
         RxDownload.INSTANCE.stop(url).subscribe();

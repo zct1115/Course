@@ -1,15 +1,19 @@
 package com.example.zct11.course.ui.download;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -24,6 +28,7 @@ import com.example.zct11.course.databinding.DownloadManagerItemBinding;
 import com.example.zct11.course.message.DeleteDownload;
 import com.example.zct11.course.message.EditDownload;
 import com.example.zct11.course.message.IsDownload;
+import com.example.zct11.course.utils.ImageLoaderUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -85,12 +90,6 @@ public class DownloadActivity extends AppCompatActivity {
         return true;
     }
 
-    @Subscribe
-    public void isdownload(IsDownload editDownload) {
-        if (editDownload.isEdit()) {
-            loadData();
-        }
-    }
 
     public void loadData() {
         RxDownload.INSTANCE.getAllMission()
@@ -102,6 +101,8 @@ public class DownloadActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     @Subscribe
     public void delete(DeleteDownload deleteDownload) {
@@ -191,6 +192,25 @@ public class DownloadActivity extends AppCompatActivity {
                     dispatchClick();
                 }
             });
+            binding.li.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    new AlertDialog.Builder(DownloadActivity.this).setMessage("确认删除？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            RxDownload.INSTANCE.delete(customMission, false)
+                                    .subscribe(new Consumer<Object>() {
+                                        @Override
+                                        public void accept(Object o) throws Exception {
+                                            delete();
+                                            loadData();
+                                        }
+                                    });
+                        }
+                    }).setNegativeButton("取消", null).show();
+                    return true;
+                }
+            });
         }
 
         private void dispatchClick() {
@@ -230,7 +250,6 @@ public class DownloadActivity extends AppCompatActivity {
         private void setProgress(Status status) {
             binding.progressBar.setMax((int) status.getTotalSize());
             binding.progressBar.setProgress((int) status.getDownloadSize());
-
             binding.percent.setText(status.percent());
             binding.size.setText(status.formatString());
         }
@@ -249,7 +268,8 @@ public class DownloadActivity extends AppCompatActivity {
                 text = "失败";
             } else if (status instanceof Succeed) {
                 DBManager dbManager = new DBManager(DownloadActivity.this);
-                dbManager.insert(new Download(customMission.getSaveName(), mission.getSavePath(), mission.getSaveName(),status.formatDownloadSize()));
+                String img="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514205141&di=f50482fa23171b74fb3dd2f3700b65ed&imgtype=jpg&er=1&src=http%3A%2F%2Fi2.sinaimg.cn%2Fgm%2F2014%2F0901%2FU10515P115DT20140901113257.jpg";
+                dbManager.insert(new Download(img, mission.getSavePath(), mission.getSaveName(),status.formatDownloadSize()));
                 RxDownload.INSTANCE.delete(customMission, false)
                         .subscribe(new Consumer<Object>() {
                             @Override
@@ -257,7 +277,6 @@ public class DownloadActivity extends AppCompatActivity {
                                 loadData();
                             }
                         });
-                //EventBus.getDefault().post(new DeleteDownload(true,position,status.formatTotalSize()));
             }
             binding.action.setText(text);
 

@@ -23,40 +23,42 @@
             android:layout_gravity="center"></android.support.v7.widget.RecyclerView>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/deletelin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
+
             <TextView
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:id="@+id/nocheck"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:textColor="@color/colorselec"
                 android:background="@drawable/line"
-                android:id="@+id/nocheck"
-                android:text="选择"/>
+                android:gravity="center"
+                android:text="选择"
+                android:textColor="@color/colorselec" />
 
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"></LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1"></LinearLayout>
+
             <TextView
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:id="@+id/delete"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:textColor="@color/colordelete"
                 android:background="@drawable/line"
-                android:id="@+id/delete"
-                android:text="删除"/>
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="@color/colordelete" />
         </LinearLayout>
     </RelativeLayout>
 

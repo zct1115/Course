@@ -129,6 +129,8 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
         manager = new DBManager(this);
         List<Download> downloads = manager.getData();
         List<MyVideo> data = new ArrayList<>();
+
+
         if (downloads != null) {
             for (int i = 0; i < downloads.size(); i++) {
                 MyVideo myVideo = new MyVideo();

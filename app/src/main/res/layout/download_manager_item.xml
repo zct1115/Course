@@ -8,6 +8,7 @@
             android:layout_height="80dp"
             android:background="@color/colorWhite"
             android:orientation="vertical"
+            android:id="@+id/li"
             android:paddingBottom="2dp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="81dp">
@@ -56,12 +57,13 @@
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="15dp"
                     android:layout_marginStart="8dp"
-                    android:maxLines="1"
                     android:ellipsize="end"
+                    android:maxLines="1"
                     app:layout_constraintBottom_toTopOf="@+id/progressBar"
                     app:layout_constraintStart_toEndOf="@+id/icon"
+                    android:layout_marginRight="10dp"
                     tools:text="android" />
                 <TextView
                     android:id="@+id/percent"

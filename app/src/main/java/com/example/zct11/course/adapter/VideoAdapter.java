@@ -81,7 +81,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
     private void setViewHolder(final videoViewHolder holder, final int position) {
         holder.name.setText(data.get(position).getTitle());
         holder.size.setText(data.get(position).getSize());
-        ImageLoaderUtils.display(context,holder.imageView,data.get(position).getImg());
+        ImageLoaderUtils.displayBigPhoto(context,holder.imageView,data.get(position).getImg());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
