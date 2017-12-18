@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(new StringBuilder().append("create table if not exists ").append(table_name).append("(id integer primary key,path varchar,name varchar,size varchar)").toString());
+        db.execSQL(new StringBuilder().append("create table if not exists ").append(table_name).append("(id integer primary key,img varchar,path varchar,name varchar,size varchar)").toString());
         db.execSQL(new StringBuilder().append("create table if not exists ").append(history_name).append("(id integer primary key,url varchar,title varchar,img varchar)").toString());
     }
 

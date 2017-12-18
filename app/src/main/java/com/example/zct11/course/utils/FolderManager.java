@@ -23,7 +23,7 @@ public class FolderManager {
     /**
      * 存放视频目录名
      */
-    private final static String PHOTO_VIDEO_NAME = "video";
+    private final static String VIDEO_FOLDER_NAME = "video";
     /**
      * 存放闪退日志目录名
      */
@@ -75,8 +75,8 @@ public class FolderManager {
         File appFolder = getAppFolder();
         if (appFolder != null) {
 
-            File photoFolder = new File(appFolder, PHOTO_VIDEO_NAME);
-            return createOnNotFound(photoFolder);
+            File videoFolder = new File(appFolder, VIDEO_FOLDER_NAME);
+            return createOnNotFound(videoFolder);
 
         } else {
             return null;

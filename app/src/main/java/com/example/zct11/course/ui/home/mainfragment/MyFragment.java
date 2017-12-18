@@ -98,8 +98,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             if(bitmap!=null){
                 circleImageView.setImageBitmap(bitmap);
             }
-            sexImg.setVisibility(View.VISIBLE);
-            name.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"name"));
+            if(!SPUtils.getSharedStringData(CourseApplication.getAppContext(),"sex").equals("")){
+                name.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"name"));
+                sexImg.setVisibility(View.VISIBLE);
+            }else {
+                name.setText("请完善你的信息");
+                sexImg.setVisibility(View.GONE);
+            }
+
             if(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"sex").equals("男")){
                 sexImg.setImageDrawable(getResources().getDrawable(R.drawable.b));
             }
@@ -161,8 +167,14 @@ public class MyFragment extends Fragment implements View.OnClickListener {
             if(bitmap!=null){
                 circleImageView.setImageBitmap(bitmap);
             }
-            sexImg.setVisibility(View.VISIBLE);
-            name.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"name"));
+            if(!SPUtils.getSharedStringData(CourseApplication.getAppContext(),"sex").equals("")){
+                sexImg.setVisibility(View.VISIBLE);
+                name.setText(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"name"));
+            }else {
+                name.setText("请完善你的信息");
+                sexImg.setVisibility(View.GONE);
+            }
+
             if(SPUtils.getSharedStringData(CourseApplication.getAppContext(),"sex").equals("男")){
                 sexImg.setImageDrawable(getResources().getDrawable(R.drawable.b));
             }

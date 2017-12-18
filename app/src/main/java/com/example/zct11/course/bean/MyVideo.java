@@ -7,10 +7,19 @@ import zlc.season.practicalrecyclerview.ItemType;
  */
 
 public class MyVideo  implements ItemType {
+    private String img;
     private String path;
     private String title;
     private String size;
     private String id;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getId() {
         return id;

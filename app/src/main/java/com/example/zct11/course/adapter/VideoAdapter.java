@@ -17,6 +17,7 @@ import com.example.zct11.course.R;
 import com.example.zct11.course.bean.Download;
 import com.example.zct11.course.bean.MyVideo;
 import com.example.zct11.course.ui.download.DownloadItem;
+import com.example.zct11.course.utils.ImageLoaderUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -80,32 +81,18 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
     private void setViewHolder(final videoViewHolder holder, final int position) {
         holder.name.setText(data.get(position).getTitle());
         holder.size.setText(data.get(position).getSize());
+        ImageLoaderUtils.display(context,holder.imageView,data.get(position).getImg());
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mOnItemClickListenr.onItemClick(position);
             }
         });
-       /* holder.linearLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                holder.checkBox.setVisibility(View.VISIBLE);
-
-                mOnItemClickListenr.onLongClick(position);
-                return false;
-            }
-        });*/
         if (isshowBox) {
             holder.checkBox.setVisibility(View.VISIBLE);
         } else {
             holder.checkBox.setVisibility(View.GONE);
         }
-        /*Animation animation = AnimationUtils.loadAnimation(context, R.anim.list_anim);*/
-        //设置checkBox显示的动画
-        /*if (isshowBox)
-            holder.checkBox.startAnimation(animation);*/
-        //设置Tag
-        /*holder.root.setTag(position);*/
         //设置checkBox改变监听
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -120,11 +107,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.videoViewHol
 
             }
         });
-       /* // 设置CheckBox的状态
-        if (map.get(position) == null) {
-            map.put(position, false);
-        }*/
-        //holder.checkBox.setChecked(map.get(position));
 
 
     }

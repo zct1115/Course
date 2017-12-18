@@ -35,6 +35,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -131,7 +132,8 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
         if (downloads != null) {
             for (int i = 0; i < downloads.size(); i++) {
                 MyVideo myVideo = new MyVideo();
-                myVideo.setPath(downloads.get(i).getUrl());
+                myVideo.setPath(downloads.get(i).getPath());
+                myVideo.setImg(downloads.get(i).getImg());
                 myVideo.setSize(downloads.get(i).getSize());
                 myVideo.setTitle(downloads.get(i).getName());
                 myVideo.setId(downloads.get(i).getId());
@@ -154,7 +156,7 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
 
     @Override
     public void onItemClick(int position) {
-        //JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, videos.get(position).getPath(), videos.get(position).getTitle());
+        JCVideoPlayerStandard.startFullscreen(this, JCVideoPlayerStandard.class, videos.get(position).getPath()+"/"+videos.get(position).getTitle(), videos.get(position).getTitle());
         //JCVideoPlayer.
     }
 
@@ -164,7 +166,7 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         switch (v.getId()) {
             case R.id.nocheck:
                 mAdapter.setIsshowBox(true);
@@ -184,6 +186,9 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
                                for(int i=0;i<videos.size();i++){
                                    if(key==i){
                                        manager.delete(videos.get(i).getId());
+                                       File file=new File(videos.get(i).getPath()+"/"+videos.get(i).getTitle());
+                                       file.delete();
+                                      // videos.get(i).getPath()
                                    }
                                }
                            }
