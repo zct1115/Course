@@ -50,7 +50,7 @@ public class Study extends Fragment implements View.OnClickListener {
     private Disposable disposable;
     private Status currentStatus = new Status();
     private boolean flog = false;
-    private String url = "https://d.pcs.baidu.com/file/f1f61baf89a30ab34d71e5837f02caae?fid=3733671192-250528-184852326148573&time=1513597282&rt=pr&sign=FDTAERVCY-DCb740ccc5511e5e8fedcff06b081203-vt4CvGmbJSkDoqysYdbpWh4o2MU%3D&expires=8h&chkv=1&chkbd=1&chkpc=et&dp-logid=8159708363089993386&dp-callid=0&r=157814781";
+    private String url = "https://d.pcs.baidu.com/file/f1f61baf89a30ab34d71e5837f02caae?fid=3733671192-250528-184852326148573&time=1513671942&rt=pr&sign=FDTAERVCY-DCb740ccc5511e5e8fedcff06b081203-tcUdEIXY1%2BSrg895YYy5JMtCyUs%3D&expires=8h&chkv=1&chkbd=1&chkpc=et&dp-logid=8179749753638837366&dp-callid=0&r=636240564";
     private String title = "android";
     private String img = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514205141&di=f50482fa23171b74fb3dd2f3700b65ed&imgtype=jpg&er=1&src=http%3A%2F%2Fi2.sinaimg.cn%2Fgm%2F2014%2F0901%2FU10515P115DT20140901113257.jpg";
 

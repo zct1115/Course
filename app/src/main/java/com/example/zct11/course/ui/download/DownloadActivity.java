@@ -35,6 +35,7 @@ import com.example.zct11.course.utils.SPUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,12 +86,6 @@ public class DownloadActivity extends AppCompatActivity {
         loadData();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.down_menu, menu);
-        return true;
-    }
 
 
     public void loadData() {
@@ -105,16 +100,6 @@ public class DownloadActivity extends AppCompatActivity {
     }
 
 
-
-    @Subscribe
-    public void delete(DeleteDownload deleteDownload) {
-        if (deleteDownload.isDelete()) {
-            adapter.save(deleteDownload.getPosition(), deleteDownload.getSize(), this);
-            adapter.deleteData(deleteDownload.getPosition());
-
-        }
-
-    }
 
 
     @Override
@@ -138,13 +123,6 @@ public class DownloadActivity extends AppCompatActivity {
             notifyDataSetChanged();
         }
 
-        public void save(int position, String size, Context context) {
-            Mission mission = this.data.get(position);
-            CustomMission customMission = (CustomMission) mission;
-             DBManager dbManager = new DBManager(context);
-            dbManager.insert(new Download(customMission.getSaveName(), mission.getSavePath(), mission.getSaveName(), size));
-            // EventBus.getDefault().post(new DownloadItem(mission.getUrl(),mission.getSavePath(),mission.getSaveName(),customMission.getSaveName()));
-        }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -155,7 +133,7 @@ public class DownloadActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.setData((CustomMission) data.get(position), position);
+            holder.setData((CustomMission) data.get(position));
         }
 
         @Override
@@ -180,7 +158,6 @@ public class DownloadActivity extends AppCompatActivity {
         private CustomMission customMission;
         private Disposable disposable;
         private Status currentStatus;
-        private int position;
         private Mission mission;
 
         private DownloadManagerItemBinding binding;
@@ -197,7 +174,7 @@ public class DownloadActivity extends AppCompatActivity {
             binding.li.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    new AlertDialog.Builder(DownloadActivity.this).setMessage("确认删除？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    new AlertDialog.Builder(DownloadActivity.this).setMessage("确认删除缓存并删除本地数据？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             RxDownload.INSTANCE.delete(customMission, false)
@@ -228,12 +205,10 @@ public class DownloadActivity extends AppCompatActivity {
         }
 
 
-        public void setData(Mission mission, int position) {
+        public void setData(Mission mission) {
             this.customMission = (CustomMission) mission;
-            this.position = position;
             this.mission=mission;
             binding.title.setText(mission.getSaveName());
-            // Picasso.with(itemView.getContext()).load(customMission.getImg()).into(binding.icon);
         }
 
         public void onAttach() {
@@ -298,8 +273,11 @@ public class DownloadActivity extends AppCompatActivity {
         }
 
         private void delete() {
-            RxDownload.INSTANCE.delete(customMission.getUrl(),true);
-            RxDownload.INSTANCE.clear(customMission);
+            File file=new File(customMission.getSavePath()+"/"+mission.getSaveName()+".download");
+            file.delete();
+            RxDownload.INSTANCE.clear(mission.getUrl());
+            RxDownload.INSTANCE.clear(mission);
+            SPUtils.setSharedStringData(CourseApplication.getAppContext(),"isDownloading","have");
 
         }
 
