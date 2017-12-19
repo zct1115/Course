@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.zct11.course.R;
+import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.bean.CustomMission;
 import com.example.zct11.course.bean.Download;
 import com.example.zct11.course.client.NetworkUtil;
@@ -29,6 +30,7 @@ import com.example.zct11.course.message.DeleteDownload;
 import com.example.zct11.course.message.EditDownload;
 import com.example.zct11.course.message.IsDownload;
 import com.example.zct11.course.utils.ImageLoaderUtils;
+import com.example.zct11.course.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -139,7 +141,7 @@ public class DownloadActivity extends AppCompatActivity {
         public void save(int position, String size, Context context) {
             Mission mission = this.data.get(position);
             CustomMission customMission = (CustomMission) mission;
-            DBManager dbManager = new DBManager(context);
+             DBManager dbManager = new DBManager(context);
             dbManager.insert(new Download(customMission.getSaveName(), mission.getSavePath(), mission.getSaveName(), size));
             // EventBus.getDefault().post(new DownloadItem(mission.getUrl(),mission.getSavePath(),mission.getSaveName(),customMission.getSaveName()));
         }
@@ -269,6 +271,7 @@ public class DownloadActivity extends AppCompatActivity {
             } else if (status instanceof Succeed) {
                 DBManager dbManager = new DBManager(DownloadActivity.this);
                 String img="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514205141&di=f50482fa23171b74fb3dd2f3700b65ed&imgtype=jpg&er=1&src=http%3A%2F%2Fi2.sinaimg.cn%2Fgm%2F2014%2F0901%2FU10515P115DT20140901113257.jpg";
+                SPUtils.setSharedStringData(CourseApplication.getAppContext(),"isDownloading","had");
                 dbManager.insert(new Download(img, mission.getSavePath(), mission.getSaveName(),status.formatDownloadSize()));
                 RxDownload.INSTANCE.delete(customMission, false)
                         .subscribe(new Consumer<Object>() {
@@ -295,7 +298,9 @@ public class DownloadActivity extends AppCompatActivity {
         }
 
         private void delete() {
+            RxDownload.INSTANCE.delete(customMission.getUrl(),true);
             RxDownload.INSTANCE.clear(customMission);
+
         }
 
     }

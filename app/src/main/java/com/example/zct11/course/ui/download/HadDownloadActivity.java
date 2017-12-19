@@ -30,6 +30,7 @@ import com.example.zct11.course.bean.MyVideo;
 import com.example.zct11.course.database.DBManager;
 import com.example.zct11.course.message.Downloadmessage;
 import com.example.zct11.course.message.EditDownload;
+import com.example.zct11.course.utils.SPUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -190,6 +191,7 @@ public class HadDownloadActivity extends AppCompatActivity implements VideoAdapt
                                        manager.delete(videos.get(i).getId());
                                        File file=new File(videos.get(i).getPath()+"/"+videos.get(i).getTitle());
                                        file.delete();
+                                       SPUtils.setSharedStringData(CourseApplication.getAppContext(),"isDownloading","have");
                                       // videos.get(i).getPath()
                                    }
                                }

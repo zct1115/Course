@@ -14,16 +14,21 @@ import android.view.View;
 import com.example.zct11.course.R;
 import com.example.zct11.course.adapter.MypagerAdapter;
 import com.example.zct11.course.bean.TabEntity;
+import com.example.zct11.course.database.CustomSqliteActor;
 import com.example.zct11.course.ui.home.mainfragment.DownLoadFragment;
 import com.example.zct11.course.ui.home.mainfragment.MainFragment;
 import com.example.zct11.course.ui.home.mainfragment.MessageFragment;
 import com.example.zct11.course.ui.home.mainfragment.MyFragment;
+import com.example.zct11.course.utils.FolderManager;
 import com.example.zct11.course.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import zlc.season.rxdownload3.core.DownloadConfig;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         dialog = builder.create();
         dialog.show();
         permssion();
+
         view=getWindow().getDecorView();
         viewPager= (ViewPager) findViewById(R.id.viewpager);
         mTabLayout = ViewFindUtils.find(view,R.id.tl);

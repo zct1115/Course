@@ -9,6 +9,7 @@ import com.example.zct11.course.database.CustomSqliteActor;
 import com.example.zct11.course.utils.FolderManager;
 
 import java.io.File;
+import java.io.IOException;
 
 import zlc.season.rxdownload3.core.DownloadConfig;
 import zlc.season.rxdownload3.extension.ApkInstallExtension;
@@ -32,14 +33,15 @@ public class CourseApplication extends BaseApplication {
 
         courseApplication=this;
         initTextSize();
-        FolderManager.getPhotoFolder();
-        DownloadConfig.Builder builder = DownloadConfig.Builder.Companion.create(this)
+        DownloadConfig.Builder build = DownloadConfig.Builder.Companion.create(this)
                 .enableDb(true)
                 .setDbActor(new CustomSqliteActor(this))
+                .setDefaultPath(FolderManager.getVideoFolder().getPath())
                 .enableService(true)
                 .enableNotification(true);
+        DownloadConfig.INSTANCE.init(build);
 
-        DownloadConfig.INSTANCE.init(builder);
+
     }
 
     /**

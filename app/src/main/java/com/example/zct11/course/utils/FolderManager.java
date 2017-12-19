@@ -23,7 +23,7 @@ public class FolderManager {
     /**
      * 存放视频目录名
      */
-    private final static String VIDEO_FOLDER_NAME = "video";
+    private final static String VIDEO_FOLDER_NAME = "myvideo";
     /**
      * 存放闪退日志目录名
      */
