@@ -73,22 +73,22 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_sign"
+                android:id="@+id/btn_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:layout_marginTop="24dp"
                 android:padding="12dp"
                 android:background="@color/colorTheme"
-                android:text="登录"/>
+                android:text="注册"/>
 
             <TextView
-                android:id="@+id/tv_register"
+                android:id="@+id/tv_login"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:text="去注册"
+                android:text="去登录"
                 android:textSize="16dip"/>
 
         </LinearLayout>

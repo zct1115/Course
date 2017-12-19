@@ -13,6 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String db="course.db";
     private static final String table_name="down";
     private static final String history_name="history";
+    private static final String login_name="login";
     private static final int version=2;
 
     public DBHelper(Context context) {
@@ -25,12 +26,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(new StringBuilder().append("create table if not exists ").append(table_name).append("(id integer primary key,img varchar,path varchar,name varchar,size varchar)").toString());
         db.execSQL(new StringBuilder().append("create table if not exists ").append(history_name).append("(id integer primary key,url varchar,title varchar,img varchar)").toString());
+        db.execSQL(new StringBuilder().append("create table if not exists ").append(login_name).append("(id integer primary key,username varchar,password varchar)").toString());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
      db.execSQL(new StringBuilder().append("drop table if exsits ").append(table_name).toString());
      db.execSQL(new StringBuilder().append("drop table if exsits ").append(history_name).toString());
+     db.execSQL(new StringBuilder().append("drop table if exsits ").append(login_name).toString());
      this.onCreate(db);
     }
 }

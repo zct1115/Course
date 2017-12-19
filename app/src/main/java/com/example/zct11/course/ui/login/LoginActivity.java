@@ -2,11 +2,13 @@ package com.example.zct11.course.ui.login;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -14,6 +16,7 @@ import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 import android.support.v8.renderscript.ScriptIntrinsicBlur;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +26,7 @@ import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.database.LoginManager;
 import com.example.zct11.course.message.LoginMessage;
 import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
@@ -35,7 +39,7 @@ import org.greenrobot.eventbus.EventBus;
  * Created by Administrator on 2017/10/24.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private EditText inputEmail;
@@ -58,14 +62,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
-        inputEmail= (EditText) findViewById(R.id.input_email);
-        inputPassword= (EditText) findViewById(R.id.input_password);
-        btnSign= (AppCompatButton) findViewById(R.id.btn_sign);
-        tvRegister= (TextView) findViewById(R.id.tv_register);
-        svRoot= (ScrollView) findViewById(R.id.sv_root);
-        back= (ImageView) findViewById(R.id.back);
+        inputEmail = (EditText) findViewById(R.id.input_email);
+        inputPassword = (EditText) findViewById(R.id.input_password);
+        btnSign = (AppCompatButton) findViewById(R.id.btn_sign);
+        tvRegister = (TextView) findViewById(R.id.tv_register);
+        svRoot = (ScrollView) findViewById(R.id.sv_root);
+        back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
         btnSign.setOnClickListener(this);
+        tvRegister.setOnClickListener(this);
         //高斯模糊背景
         applyBlur();
     }
@@ -73,71 +78,52 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-       switch (view.getId()){
-           case R.id.back:
-               LoginActivity.this.finish();
-               break;
-           case R.id.btn_sign:
-               if (!validate()) {
-                   return;
-               }
+        switch (view.getId()) {
+            case R.id.back:
+                LoginActivity.this.finish();
+                break;
+            case R.id.btn_sign:
 
-               btnSign.setEnabled(false);
+                btnSign.setEnabled(false);
 
-               mProgressDialog = new ProgressDialog(this);
-               mProgressDialog.setIndeterminate(true);
-               mProgressDialog.setMessage("正在验证...");
-               mProgressDialog.show();
+                mProgressDialog = new ProgressDialog(this);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setMessage("正在验证...");
+                mProgressDialog.show();
 
-               String userword = inputEmail.getText().toString();
-               String password = inputPassword.getText().toString();
-               if(userword.equals("17875057401")&&password.equals("123456")){
-                   ToastUtil.showToast("登录成功");
-                   SPUtils.setSharedBooleanData(CourseApplication.getAppContext(),"islogin",true);
-                   EventBus.getDefault().post(new LoginMessage(true));
-                   finish();
-               }else {
-                   ToastUtil.showToast("用户名或者密码有误！");
-               }
-               inputEmail.setText("");
-               inputPassword.setText("");
-               mProgressDialog.dismiss();
-               btnSign.setEnabled(true);
+                final String userword = inputEmail.getText().toString();
+                final String password = inputPassword.getText().toString();
 
-               break;
-           case R.id.tv_register:
 
-               break;
-       }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mProgressDialog.dismiss();
+                        LoginManager loginManager = new LoginManager(LoginActivity.this);
+                        if (!loginManager.checked(userword, password)) {
+                            SPUtils.setSharedBooleanData(CourseApplication.getAppContext(), "islogin", true);
+                            EventBus.getDefault().post(new LoginMessage(true));
+                            ToastUtil.showToast("登录成功");
+                            LoginActivity.this.finish();
+                        } else {
+                            ToastUtil.showToast("用户名或者密码有误！");
+                        }
+
+                    }
+                }, 3000);
+
+                inputEmail.setText("");
+                inputPassword.setText("");
+
+                btnSign.setEnabled(true);
+
+                break;
+            case R.id.tv_register:
+                startActivity(new Intent(this, RegisterActivity.class));
+                break;
+        }
     }
 
-    /**
-     * 邮箱，密码是否格式正确
-     *
-     * @return
-     */
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = inputEmail.getText().toString();
-        String password = inputPassword.getText().toString();
-
-        if (email.isEmpty() || !Patterns.PHONE.matcher(email).matches()) {
-            inputEmail.setError("请输入有效的手机号码");
-            valid = false;
-        } else {
-            inputEmail.setError(null);
-        }
-
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            inputPassword.setError("密码长度在4-10位之间");
-            valid = false;
-        } else {
-            inputPassword.setError(null);
-        }
-
-        return valid;
-    }
 
     private void applyBlur() {
         Drawable db = getResources().getDrawable(R.drawable.bg);

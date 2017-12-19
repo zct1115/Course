@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
+import com.example.zct11.course.bean.User;
+import com.example.zct11.course.database.LoginManager;
 import com.example.zct11.course.message.LoginMessage;
 import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
@@ -43,12 +45,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private TextView tvRegister;
     private ScrollView svRoot;
     private int radius = 25;
-    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         StatusBarUtil.setTranslucent(this);
         init();
 
@@ -58,10 +59,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void init() {
         inputEmail= (EditText) findViewById(R.id.input_email);
         inputPassword= (EditText) findViewById(R.id.input_password);
-        btnSign= (AppCompatButton) findViewById(R.id.register);
+        btnSign= (AppCompatButton) findViewById(R.id.btn_register);
         tvRegister= (TextView) findViewById(R.id.tv_login);
         svRoot= (ScrollView) findViewById(R.id.sv_root);
         back= (ImageView) findViewById(R.id.back);
+        tvRegister.setOnClickListener(this);
         back.setOnClickListener(this);
         btnSign.setOnClickListener(this);
         //高斯模糊背景
@@ -75,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
            case R.id.back:
                RegisterActivity.this.finish();
                break;
-           case R.id.register:
+           case R.id.btn_register:
                if (!validate()) {
                    return;
                }
@@ -85,20 +87,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                String userword = inputEmail.getText().toString();
                String password = inputPassword.getText().toString();
-               if(userword.equals("17875057401")&&password.equals("123456")){
+
+
+               LoginManager loginManager=new LoginManager(this);
+               User user=new User(userword,password);
+               loginManager.insert(user);
+               ToastUtil.showToast("注册成功");
+               /*if(userword.equals("17875057401")&&password.equals("123456")){
                    ToastUtil.showToast("登录成功");
                    SPUtils.setSharedBooleanData(CourseApplication.getAppContext(),"islogin",true);
                    EventBus.getDefault().post(new LoginMessage(true));
                    finish();
                }else {
                    ToastUtil.showToast("用户名或者密码有误！");
-               }
+               }*/
                inputEmail.setText("");
                inputPassword.setText("");
                btnSign.setEnabled(true);
 
                break;
-           case R.id.tv_register:
+           case R.id.tv_login:
                RegisterActivity.this.finish();
                break;
        }
@@ -133,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void applyBlur() {
-        Drawable db = getResources().getDrawable(R.drawable.bg);
+        Drawable db = getResources().getDrawable(R.drawable.bg1);
         BitmapDrawable drawable = (BitmapDrawable) db;
         Bitmap bgBitmap = drawable.getBitmap();
         //处理得到模糊效果的图
