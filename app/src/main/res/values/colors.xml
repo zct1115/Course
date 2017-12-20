@@ -41,4 +41,9 @@
     <color name="headGradientCenter">#00ffffff</color>
     <color name="headGradientEnd">#96000000</color>
     <color name="colorListDivider">#e6e6e6</color>
+
+    <!--item的分割线-->
+    <color name="colorLineItem">#FFDDDDDD</color>
+
+    <color name="accent_material_yelloy">#b18933</color>
 </resources>

@@ -67,7 +67,6 @@ public class DownloadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_download);
         initView();
-        EventBus.getDefault().register(this);
     }
 
     private void initView() {
@@ -105,7 +104,6 @@ public class DownloadActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
      class Adapter extends RecyclerView.Adapter<ViewHolder> {

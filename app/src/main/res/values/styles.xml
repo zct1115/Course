@@ -103,4 +103,24 @@
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
+
+
+    <!--水平分隔线-->
+    <style name="horizontalLine">
+        <item name="android:background">@color/colorLineItem</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <!--菜单item-->
+    <style name="menuItem">
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:textColor">@color/colorline</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

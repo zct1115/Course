@@ -24,6 +24,7 @@ import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.bean.User;
 import com.example.zct11.course.database.LoginManager;
 import com.example.zct11.course.message.LoginMessage;
+import com.example.zct11.course.utils.MD5Util;
 import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
 import com.example.zct11.course.widget.statusbar.StatusBarUtil;
@@ -86,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
                String userword = inputEmail.getText().toString();
-               String password = inputPassword.getText().toString();
+               String password = MD5Util.MD5(inputPassword.getText().toString());
 
 
                LoginManager loginManager=new LoginManager(this);

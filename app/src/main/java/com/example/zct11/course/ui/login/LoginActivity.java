@@ -21,6 +21,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ import com.example.zct11.course.R;
 import com.example.zct11.course.app.CourseApplication;
 import com.example.zct11.course.database.LoginManager;
 import com.example.zct11.course.message.LoginMessage;
+import com.example.zct11.course.utils.MD5Util;
 import com.example.zct11.course.utils.SPUtils;
 import com.example.zct11.course.utils.ToastUtil;
 import com.example.zct11.course.widget.statusbar.StatusBarUtil;
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText inputPassword;
     private AppCompatButton btnSign;
     private ImageView back;
-    private TextView tvRegister;
+    private LinearLayout tvRegister;
     private ScrollView svRoot;
     private int radius = 25;
     private ProgressDialog mProgressDialog;
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
         btnSign = (AppCompatButton) findViewById(R.id.btn_sign);
-        tvRegister = (TextView) findViewById(R.id.tv_register);
+        tvRegister = (LinearLayout) findViewById(R.id.tv_register);
         svRoot = (ScrollView) findViewById(R.id.sv_root);
         back = (ImageView) findViewById(R.id.back);
         back.setOnClickListener(this);
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 mProgressDialog.show();
 
                 final String userword = inputEmail.getText().toString();
-                final String password = inputPassword.getText().toString();
+                final String password = MD5Util.MD5(inputPassword.getText().toString());
 
 
                 new Handler().postDelayed(new Runnable() {
